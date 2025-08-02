@@ -1,17 +1,17 @@
-import OpenAI from 'openai';
-import fs from 'fs/promises';
-import path from 'path';
-import dotenv from 'dotenv';
+import OpenAI from 'openai'
+import fs from 'fs/promises'
+import path from 'path'
+import dotenv from 'dotenv'
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env' })
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
+})
 
 async function generateAbilityScoreUtils() {
-  console.log('Generating ability score utilities...');
-  
+  console.log('Generating ability score utilities...')
+
   const prompt = `Create a complete TypeScript module for D&D 5e ability score calculations. The file should include:
 
 1. Type definitions for:
@@ -51,57 +51,57 @@ async function generateAbilityScoreUtils() {
 
 Include JSDoc comments explaining D&D 5e rules for each function.
 Export all functions and types.
-Use proper TypeScript with strict typing.`;
+Use proper TypeScript with strict typing.`
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
         {
-          role: "system",
-          content: "You are an expert TypeScript developer and D&D 5e rules expert. Generate clean, well-documented TypeScript code following best practices. Output only the code content, no markdown formatting or explanations."
+          role: 'system',
+          content:
+            'You are an expert TypeScript developer and D&D 5e rules expert. Generate clean, well-documented TypeScript code following best practices. Output only the code content, no markdown formatting or explanations.',
         },
         {
-          role: "user",
-          content: prompt
-        }
+          role: 'user',
+          content: prompt,
+        },
       ],
       temperature: 0.2,
       max_tokens: 3000,
-    });
+    })
 
-    let code = completion.choices[0].message.content.trim();
-    
+    let code = completion.choices[0].message.content.trim()
+
     // Clean up any markdown formatting
     code = code
       .replace(/^```typescript\s*\n?/, '')
       .replace(/^```ts\s*\n?/, '')
       .replace(/^```\s*\n?/, '')
       .replace(/\n?```$/, '')
-      .trim();
+      .trim()
 
     // Ensure directories exist
-    await fs.mkdir('lib/game-engine', { recursive: true });
-    
+    await fs.mkdir('lib/game-engine', { recursive: true })
+
     // Save the file
-    const filePath = path.join('lib/game-engine', 'ability-scores.ts');
-    await fs.writeFile(filePath, code, 'utf8');
-    
-    console.log(`✓ Generated ${filePath}`);
-    console.log('  Functions included:');
-    console.log('  - getAbilityModifier()');
-    console.log('  - getAllModifiers()');
-    console.log('  - getProficiencyBonus()');
-    console.log('  - getSkillModifier()');
-    console.log('  - getAbilityForSkill()');
-    console.log('  - Plus additional D&D utilities');
-    
+    const filePath = path.join('lib/game-engine', 'ability-scores.ts')
+    await fs.writeFile(filePath, code, 'utf8')
+
+    console.log(`✓ Generated ${filePath}`)
+    console.log('  Functions included:')
+    console.log('  - getAbilityModifier()')
+    console.log('  - getAllModifiers()')
+    console.log('  - getProficiencyBonus()')
+    console.log('  - getSkillModifier()')
+    console.log('  - getAbilityForSkill()')
+    console.log('  - Plus additional D&D utilities')
   } catch (error) {
-    console.error('Error generating ability score utilities:', error);
-    
+    console.error('Error generating ability score utilities:', error)
+
     // If token limit is hit, try a simpler version
-    console.log('\nTrying with reduced scope...');
-    await generateSimplifiedVersion();
+    console.log('\nTrying with reduced scope...')
+    await generateSimplifiedVersion()
   }
 }
 
@@ -132,37 +132,40 @@ function getProficiencyBonus(level: number): number {
 // Calculate skill modifier
 function getSkillModifier({ abilityScore, proficiencyBonus, isProficient, hasExpertise }: SkillModifierParams): number
 
-Include other essential functions and export all.`;
+Include other essential functions and export all.`
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
         {
-          role: "system",
-          content: "Generate TypeScript code for D&D 5e calculations. Output only code."
+          role: 'system',
+          content:
+            'Generate TypeScript code for D&D 5e calculations. Output only code.',
         },
         {
-          role: "user",
-          content: simplifiedPrompt
-        }
+          role: 'user',
+          content: simplifiedPrompt,
+        },
       ],
       temperature: 0.2,
       max_tokens: 2000,
-    });
+    })
 
-    let code = completion.choices[0].message.content.trim();
-    code = code.replace(/^```[a-z]*\s*\n?/, '').replace(/\n?```$/, '').trim();
+    let code = completion.choices[0].message.content.trim()
+    code = code
+      .replace(/^```[a-z]*\s*\n?/, '')
+      .replace(/\n?```$/, '')
+      .trim()
 
-    const filePath = path.join('lib/game-engine', 'ability-scores.ts');
-    await fs.writeFile(filePath, code, 'utf8');
-    
-    console.log(`✓ Generated simplified ${filePath}`);
-    
+    const filePath = path.join('lib/game-engine', 'ability-scores.ts')
+    await fs.writeFile(filePath, code, 'utf8')
+
+    console.log(`✓ Generated simplified ${filePath}`)
   } catch (error) {
-    console.error('Error generating simplified version:', error);
+    console.error('Error generating simplified version:', error)
   }
 }
 
 // Run the generation
-generateAbilityScoreUtils();
+generateAbilityScoreUtils()

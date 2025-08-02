@@ -1,145 +1,151 @@
 [
-    {
-        "name": "Acolyte",
-        "description": "You have spent your life in the service of a temple, learning sacred rites and providing sacrifices to the god or gods you worship.",
-        "skillProficiencies": ["Insight", "Religion"],
-        "languages": 2,
-        "equipment": ["holy symbol", "prayer book"],
-        "feature": {
-            "name": "Shelter of the Faithful",
-            "description": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity."
-        }
-    },
-    {
-        "name": "Charlatan",
-        "description": "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books.",
-        "skillProficiencies": ["Deception", "Sleight of Hand"],
-        "languages": 0,
-        "equipment": ["a set of fine clothes", "a disguise kit"],
-        "feature": {
-            "name": "False Identity",
-            "description": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona."
-        }
-    },
-    {
-        "name": "Criminal",
-        "description": "You are an experienced criminal with a history of breaking the law. You have spent a lot of time among other criminals and still have contacts within the criminal underworld.",
-        "skillProficiencies": ["Deception", "Stealth"],
-        "languages": 0,
-        "equipment": ["a crowbar", "a set of dark common clothes with a hood"],
-        "feature": {
-            "name": "Criminal Contact",
-            "description": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals."
-        }
-    },
-    {
-        "name": "Entertainer",
-        "description": "You thrive in front of an audience. You know how to entrance them, entertain them, and even inspire them.",
-        "skillProficiencies": ["Acrobatics", "Performance"],
-        "languages": 0,
-        "equipment": ["a musical instrument", "the favor of an admirer"],
-        "feature": {
-            "name": "By Popular Demand",
-            "description": "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court."
-        }
-    },
-    {
-        "name": "Folk Hero",
-        "description": "You come from a humble social rank, but you are destined for so much more. Already the people of your home village regard you as their champion, and your destiny calls you to stand against the tyrants and monsters that threaten the common folk everywhere.",
-        "skillProficiencies": ["Animal Handling", "Survival"],
-        "languages": 0,
-        "equipment": ["a set of artisan's tools", "a shovel"],
-        "feature": {
-            "name": "Rustic Hospitality",
-            "description": "Since you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them."
-        }
-    },
-    {
-        "name": "Guild Artisan",
-        "description": "You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order.",
-        "skillProficiencies": ["Insight", "Persuasion"],
-        "languages": 1,
-        "equipment": ["a set of artisan's tools", "a letter of introduction from your guild"],
-        "feature": {
-            "name": "Guild Membership",
-            "description": "You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order."
-        }
-    },
-    {
-        "name": "Hermit",
-        "description": "You lived in seclusion—either in a sheltered community such as a monastery, or entirely alone—for a formative part of your life. In your time apart from the clamor of society, you found quiet, solitude, and perhaps some of the answers you were looking for.",
-        "skillProficiencies": ["Medicine", "Religion"],
-        "languages": 1,
-        "equipment": ["a scroll case stuffed full of notes from your studies or prayers", "a winter blanket"],
-        "feature": {
-            "name": "Discovery",
-            "description": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery."
-        }
-    },
-    {
-        "name": "Noble",
-        "description": "You understand wealth, power, and privilege. You carry a noble title, and your family owns land, collects taxes, and wields significant political influence.",
-        "skillProficiencies": ["History", "Persuasion"],
-        "languages": 1,
-        "equipment": ["a set of fine clothes", "a signet ring"],
-        "feature": {
-            "name": "Position of Privilege",
-            "description": "Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are."
-        }
-    },
-    {
-        "name": "Outlander",
-        "description": "You grew up in the wilds, far from civilization and the comforts of town and technology. You've witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction.",
-        "skillProficiencies": ["Athletics", "Survival"],
-        "languages": 1,
-        "equipment": ["a staff", "a hunting trap"],
-        "feature": {
-            "name": "Wanderer",
-            "description": "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you."
-        }
-    },
-    {
-        "name": "Sage",
-        "description": "You spent years learning the lore of the multiverse. You scoured manuscripts, studied scrolls, and listened to the greatest experts on the subjects that interest you. Your efforts have made you a master in your field.",
-        "skillProficiencies": ["Arcana", "History"],
-        "languages": 2,
-        "equipment": ["a bottle of black ink", "a quill", "a small knife"],
-        "feature": {
-            "name": "Researcher",
-            "description": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it."
-        }
-    },
-    {
-        "name": "Sailor",
-        "description": "You sailed on a seagoing vessel for years. In that time, you faced down mighty storms, monsters of the deep, and those who wanted to sink your craft to the bottomless depths.",
-        "skillProficiencies": ["Athletics", "Perception"],
-        "languages": 0,
-        "equipment": ["a belaying pin (club)", "50 feet of silk rope"],
-        "feature": {
-            "name": "Ship's Passage",
-            "description": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with."
-        }
-    },
-    {
-        "name": "Soldier",
-        "description": "War has been your life for as long as you care to remember. You trained as a youth, studied the use of weapons and armor, learned basic survival techniques, including how to stay alive on the battlefield.",
-        "skillProficiencies": ["Athletics", "Intimidation"],
-        "languages": 0,
-        "equipment": ["an insignia of rank", "a trophy taken from a fallen enemy"],
-        "feature": {
-            "name": "Military Rank",
-            "description": "You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank."
-        }
-    },
-    {
-        "name": "Urchin",
-        "description": "You grew up on the streets alone, orphaned, and poor. You had no one to watch over you or to provide for you, so you learned to provide for yourself.",
-        "skillProficiencies": ["Sleight of Hand", "Stealth"],
-        "languages": 0,
-        "equipment": ["a small knife", "a map of the city you grew up in"],
-        "feature": {
-            "name": "City Secrets",
-            "description": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
-        }
+  {
+    "name": "Acolyte",
+    "description": "You have spent your life in the service of a temple, learning sacred rites and providing sacrifices to the god or gods you worship.",
+    "skillProficiencies": ["Insight", "Religion"],
+    "languages": 2,
+    "equipment": ["holy symbol", "prayer book"],
+    "feature": {
+      "name": "Shelter of the Faithful",
+      "description": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity."
     }
+  },
+  {
+    "name": "Charlatan",
+    "description": "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books.",
+    "skillProficiencies": ["Deception", "Sleight of Hand"],
+    "languages": 0,
+    "equipment": ["a set of fine clothes", "a disguise kit"],
+    "feature": {
+      "name": "False Identity",
+      "description": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona."
+    }
+  },
+  {
+    "name": "Criminal",
+    "description": "You are an experienced criminal with a history of breaking the law. You have spent a lot of time among other criminals and still have contacts within the criminal underworld.",
+    "skillProficiencies": ["Deception", "Stealth"],
+    "languages": 0,
+    "equipment": ["a crowbar", "a set of dark common clothes with a hood"],
+    "feature": {
+      "name": "Criminal Contact",
+      "description": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals."
+    }
+  },
+  {
+    "name": "Entertainer",
+    "description": "You thrive in front of an audience. You know how to entrance them, entertain them, and even inspire them.",
+    "skillProficiencies": ["Acrobatics", "Performance"],
+    "languages": 0,
+    "equipment": ["a musical instrument", "the favor of an admirer"],
+    "feature": {
+      "name": "By Popular Demand",
+      "description": "You can always find a place to perform, usually in an inn or tavern but possibly with a circus, at a theater, or even in a noble's court."
+    }
+  },
+  {
+    "name": "Folk Hero",
+    "description": "You come from a humble social rank, but you are destined for so much more. Already the people of your home village regard you as their champion, and your destiny calls you to stand against the tyrants and monsters that threaten the common folk everywhere.",
+    "skillProficiencies": ["Animal Handling", "Survival"],
+    "languages": 0,
+    "equipment": ["a set of artisan's tools", "a shovel"],
+    "feature": {
+      "name": "Rustic Hospitality",
+      "description": "Since you come from the ranks of the common folk, you fit in among them with ease. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them."
+    }
+  },
+  {
+    "name": "Guild Artisan",
+    "description": "You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order.",
+    "skillProficiencies": ["Insight", "Persuasion"],
+    "languages": 1,
+    "equipment": [
+      "a set of artisan's tools",
+      "a letter of introduction from your guild"
+    ],
+    "feature": {
+      "name": "Guild Membership",
+      "description": "You are a member of an artisan's guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order."
+    }
+  },
+  {
+    "name": "Hermit",
+    "description": "You lived in seclusion—either in a sheltered community such as a monastery, or entirely alone—for a formative part of your life. In your time apart from the clamor of society, you found quiet, solitude, and perhaps some of the answers you were looking for.",
+    "skillProficiencies": ["Medicine", "Religion"],
+    "languages": 1,
+    "equipment": [
+      "a scroll case stuffed full of notes from your studies or prayers",
+      "a winter blanket"
+    ],
+    "feature": {
+      "name": "Discovery",
+      "description": "The quiet seclusion of your extended hermitage gave you access to a unique and powerful discovery."
+    }
+  },
+  {
+    "name": "Noble",
+    "description": "You understand wealth, power, and privilege. You carry a noble title, and your family owns land, collects taxes, and wields significant political influence.",
+    "skillProficiencies": ["History", "Persuasion"],
+    "languages": 1,
+    "equipment": ["a set of fine clothes", "a signet ring"],
+    "feature": {
+      "name": "Position of Privilege",
+      "description": "Thanks to your noble birth, people are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are."
+    }
+  },
+  {
+    "name": "Outlander",
+    "description": "You grew up in the wilds, far from civilization and the comforts of town and technology. You've witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction.",
+    "skillProficiencies": ["Athletics", "Survival"],
+    "languages": 1,
+    "equipment": ["a staff", "a hunting trap"],
+    "feature": {
+      "name": "Wanderer",
+      "description": "You have an excellent memory for maps and geography, and you can always recall the general layout of terrain, settlements, and other features around you."
+    }
+  },
+  {
+    "name": "Sage",
+    "description": "You spent years learning the lore of the multiverse. You scoured manuscripts, studied scrolls, and listened to the greatest experts on the subjects that interest you. Your efforts have made you a master in your field.",
+    "skillProficiencies": ["Arcana", "History"],
+    "languages": 2,
+    "equipment": ["a bottle of black ink", "a quill", "a small knife"],
+    "feature": {
+      "name": "Researcher",
+      "description": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it."
+    }
+  },
+  {
+    "name": "Sailor",
+    "description": "You sailed on a seagoing vessel for years. In that time, you faced down mighty storms, monsters of the deep, and those who wanted to sink your craft to the bottomless depths.",
+    "skillProficiencies": ["Athletics", "Perception"],
+    "languages": 0,
+    "equipment": ["a belaying pin (club)", "50 feet of silk rope"],
+    "feature": {
+      "name": "Ship's Passage",
+      "description": "When you need to, you can secure free passage on a sailing ship for yourself and your adventuring companions. You might sail on the ship you served on, or another ship you have good relations with."
+    }
+  },
+  {
+    "name": "Soldier",
+    "description": "War has been your life for as long as you care to remember. You trained as a youth, studied the use of weapons and armor, learned basic survival techniques, including how to stay alive on the battlefield.",
+    "skillProficiencies": ["Athletics", "Intimidation"],
+    "languages": 0,
+    "equipment": ["an insignia of rank", "a trophy taken from a fallen enemy"],
+    "feature": {
+      "name": "Military Rank",
+      "description": "You have a military rank from your career as a soldier. Soldiers loyal to your former military organization still recognize your authority and influence, and they defer to you if they are of a lower rank."
+    }
+  },
+  {
+    "name": "Urchin",
+    "description": "You grew up on the streets alone, orphaned, and poor. You had no one to watch over you or to provide for you, so you learned to provide for yourself.",
+    "skillProficiencies": ["Sleight of Hand", "Stealth"],
+    "languages": 0,
+    "equipment": ["a small knife", "a map of the city you grew up in"],
+    "feature": {
+      "name": "City Secrets",
+      "description": "You know the secret patterns and flow to cities and can find passages through the urban sprawl that others would miss."
+    }
+  }
 ]

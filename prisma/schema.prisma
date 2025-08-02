@@ -42,8 +42,10 @@ model Character {
   alignment        String
   
   // Additional character details
-  backstory        String?
-  notes            String?
+  backstory              String?
+  notes                  String?
+  aiGeneratedBackground  String?
+  personalityTraits      Json   // Array of personality trait strings
   
   // Timestamps
   createdAt        DateTime @default(now())

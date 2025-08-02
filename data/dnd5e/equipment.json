@@ -5,9 +5,7 @@
       "category": "simple",
       "damage": "1d4",
       "damageType": "bludgeoning",
-      "properties": [
-        "light"
-      ],
+      "properties": ["light"],
       "cost": "1 sp",
       "weight": "2 lb"
     },
@@ -16,11 +14,7 @@
       "category": "simple",
       "damage": "1d4",
       "damageType": "piercing",
-      "properties": [
-        "finesse",
-        "light",
-        "thrown"
-      ],
+      "properties": ["finesse", "light", "thrown"],
       "cost": "2 gp",
       "weight": "1 lb",
       "range": "20/60"
@@ -30,9 +24,7 @@
       "category": "simple",
       "damage": "1d8",
       "damageType": "bludgeoning",
-      "properties": [
-        "two-handed"
-      ],
+      "properties": ["two-handed"],
       "cost": "2 sp",
       "weight": "10 lb"
     },
@@ -41,10 +33,7 @@
       "category": "simple",
       "damage": "1d6",
       "damageType": "slashing",
-      "properties": [
-        "light",
-        "thrown"
-      ],
+      "properties": ["light", "thrown"],
       "cost": "5 gp",
       "weight": "2 lb",
       "range": "20/60"
@@ -54,9 +43,7 @@
       "category": "simple",
       "damage": "1d6",
       "damageType": "piercing",
-      "properties": [
-        "thrown"
-      ],
+      "properties": ["thrown"],
       "cost": "5 sp",
       "weight": "2 lb",
       "range": "30/120"
@@ -66,10 +53,7 @@
       "category": "simple",
       "damage": "1d4",
       "damageType": "bludgeoning",
-      "properties": [
-        "light",
-        "thrown"
-      ],
+      "properties": ["light", "thrown"],
       "cost": "2 gp",
       "weight": "2 lb",
       "range": "20/60"
@@ -88,9 +72,7 @@
       "category": "simple",
       "damage": "1d6",
       "damageType": "bludgeoning",
-      "properties": [
-        "versatile"
-      ],
+      "properties": ["versatile"],
       "cost": "2 sp",
       "weight": "4 lb"
     },
@@ -99,9 +81,7 @@
       "category": "simple",
       "damage": "1d4",
       "damageType": "slashing",
-      "properties": [
-        "light"
-      ],
+      "properties": ["light"],
       "cost": "1 gp",
       "weight": "2 lb"
     },
@@ -110,10 +90,7 @@
       "category": "simple",
       "damage": "1d6",
       "damageType": "piercing",
-      "properties": [
-        "thrown",
-        "versatile"
-      ],
+      "properties": ["thrown", "versatile"],
       "cost": "1 gp",
       "weight": "3 lb",
       "range": "20/60"
@@ -121,9 +98,7 @@
     {
       "name": "Battleaxe",
       "damage": "1d8 slashing",
-      "properties": [
-        "versatile 1d10"
-      ]
+      "properties": ["versatile 1d10"]
     },
     {
       "name": "Flail",
@@ -133,59 +108,37 @@
     {
       "name": "Glaive",
       "damage": "1d10 slashing",
-      "properties": [
-        "heavy",
-        "reach",
-        "two-handed"
-      ]
+      "properties": ["heavy", "reach", "two-handed"]
     },
     {
       "name": "Greataxe",
       "damage": "1d12 slashing",
-      "properties": [
-        "heavy",
-        "two-handed"
-      ]
+      "properties": ["heavy", "two-handed"]
     },
     {
       "name": "Greatsword",
       "damage": "2d6 slashing",
-      "properties": [
-        "heavy",
-        "two-handed"
-      ]
+      "properties": ["heavy", "two-handed"]
     },
     {
       "name": "Halberd",
       "damage": "1d10 slashing",
-      "properties": [
-        "heavy",
-        "reach",
-        "two-handed"
-      ]
+      "properties": ["heavy", "reach", "two-handed"]
     },
     {
       "name": "Lance",
       "damage": "1d12 piercing",
-      "properties": [
-        "reach",
-        "special"
-      ]
+      "properties": ["reach", "special"]
     },
     {
       "name": "Longsword",
       "damage": "1d8 slashing",
-      "properties": [
-        "versatile 1d10"
-      ]
+      "properties": ["versatile 1d10"]
     },
     {
       "name": "Maul",
       "damage": "2d6 bludgeoning",
-      "properties": [
-        "heavy",
-        "two-handed"
-      ]
+      "properties": ["heavy", "two-handed"]
     },
     {
       "name": "Morningstar",
@@ -195,42 +148,27 @@
     {
       "name": "Pike",
       "damage": "1d10 piercing",
-      "properties": [
-        "heavy",
-        "reach",
-        "two-handed"
-      ]
+      "properties": ["heavy", "reach", "two-handed"]
     },
     {
       "name": "Rapier",
       "damage": "1d8 piercing",
-      "properties": [
-        "finesse"
-      ]
+      "properties": ["finesse"]
     },
     {
       "name": "Scimitar",
       "damage": "1d6 slashing",
-      "properties": [
-        "finesse",
-        "light"
-      ]
+      "properties": ["finesse", "light"]
     },
     {
       "name": "Shortsword",
       "damage": "1d6 piercing",
-      "properties": [
-        "finesse",
-        "light"
-      ]
+      "properties": ["finesse", "light"]
     },
     {
       "name": "Trident",
       "damage": "1d6 piercing",
-      "properties": [
-        "thrown 20/60",
-        "versatile 1d8"
-      ]
+      "properties": ["thrown 20/60", "versatile 1d8"]
     },
     {
       "name": "War pick",
@@ -240,60 +178,37 @@
     {
       "name": "Warhammer",
       "damage": "1d8 bludgeoning",
-      "properties": [
-        "versatile 1d10"
-      ]
+      "properties": ["versatile 1d10"]
     },
     {
       "name": "Whip",
       "damage": "1d4 slashing",
-      "properties": [
-        "finesse",
-        "reach"
-      ]
+      "properties": ["finesse", "reach"]
     },
     {
       "name": "Blowgun",
       "damage": "1 piercing",
-      "properties": [
-        "ammunition",
-        "loading"
-      ]
+      "properties": ["ammunition", "loading"]
     },
     {
       "name": "Hand crossbow",
       "damage": "1d6 piercing",
-      "properties": [
-        "ammunition",
-        "light",
-        "loading"
-      ]
+      "properties": ["ammunition", "light", "loading"]
     },
     {
       "name": "Heavy crossbow",
       "damage": "1d10 piercing",
-      "properties": [
-        "ammunition",
-        "heavy",
-        "loading",
-        "two-handed"
-      ]
+      "properties": ["ammunition", "heavy", "loading", "two-handed"]
     },
     {
       "name": "Longbow",
       "damage": "1d8 piercing",
-      "properties": [
-        "ammunition",
-        "heavy",
-        "two-handed"
-      ]
+      "properties": ["ammunition", "heavy", "two-handed"]
     },
     {
       "name": "Net",
       "damage": "special",
-      "properties": [
-        "thrown 5/15"
-      ]
+      "properties": ["thrown 5/15"]
     }
   ],
   "armor": [

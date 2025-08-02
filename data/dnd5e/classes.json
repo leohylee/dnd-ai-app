@@ -6,7 +6,14 @@
     "primaryAbility": ["Strength"],
     "savingThrows": ["Strength", "Constitution"],
     "skillChoices": 2,
-    "skillOptions": ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"],
+    "skillOptions": [
+      "Animal Handling",
+      "Athletics",
+      "Intimidation",
+      "Nature",
+      "Perception",
+      "Survival"
+    ],
     "proficiencies": {
       "armor": ["Light armor", "Medium armor", "Shields"],
       "weapons": ["Simple weapons", "Martial weapons"],
@@ -46,7 +53,13 @@
     "skillOptions": ["All"],
     "proficiencies": {
       "armor": ["Light armor"],
-      "weapons": ["Simple weapons", "Hand crossbows", "Longswords", "Rapiers", "Shortswords"],
+      "weapons": [
+        "Simple weapons",
+        "Hand crossbows",
+        "Longswords",
+        "Rapiers",
+        "Shortswords"
+      ],
       "tools": ["Three musical instruments of your choice"],
       "savingThrows": ["Dexterity", "Charisma"]
     },
@@ -85,7 +98,13 @@
     "primaryAbility": ["Wisdom"],
     "savingThrows": ["Wisdom", "Charisma"],
     "skillChoices": 2,
-    "skillOptions": ["History", "Insight", "Medicine", "Persuasion", "Religion"],
+    "skillOptions": [
+      "History",
+      "Insight",
+      "Medicine",
+      "Persuasion",
+      "Religion"
+    ],
     "proficiencies": {
       "armor": ["Light armor", "Medium armor", "Shields"],
       "weapons": ["Simple weapons"],
@@ -105,7 +124,11 @@
       "5": ["Destroy Undead (CR 1/2)"],
       "6": ["Channel Divinity (2/rest)", "Divine Domain Feature"],
       "7": [],
-      "8": ["Ability Score Improvement", "Destroy Undead (CR 1)", "Divine Domain Feature"],
+      "8": [
+        "Ability Score Improvement",
+        "Destroy Undead (CR 1)",
+        "Divine Domain Feature"
+      ],
       "9": [],
       "10": ["Divine Intervention"],
       "11": ["Destroy Undead (CR 2)"],
@@ -127,10 +150,30 @@
     "primaryAbility": ["Wisdom"],
     "savingThrows": ["Intelligence", "Wisdom"],
     "skillChoices": 2,
-    "skillOptions": ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"],
+    "skillOptions": [
+      "Arcana",
+      "Animal Handling",
+      "Insight",
+      "Medicine",
+      "Nature",
+      "Perception",
+      "Religion",
+      "Survival"
+    ],
     "proficiencies": {
       "armor": ["Light armor", "Medium armor", "Shields (non-metal)"],
-      "weapons": ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"],
+      "weapons": [
+        "Clubs",
+        "Daggers",
+        "Darts",
+        "Javelins",
+        "Maces",
+        "Quarterstaffs",
+        "Scimitars",
+        "Sickles",
+        "Slings",
+        "Spears"
+      ],
       "tools": ["Herbalism kit"],
       "savingThrows": ["Intelligence", "Wisdom"]
     },
@@ -169,7 +212,16 @@
     "primaryAbility": ["Strength", "Dexterity"],
     "savingThrows": ["Strength", "Constitution"],
     "skillChoices": 2,
-    "skillOptions": ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],
+    "skillOptions": [
+      "Acrobatics",
+      "Animal Handling",
+      "Athletics",
+      "History",
+      "Insight",
+      "Intimidation",
+      "Perception",
+      "Survival"
+    ],
     "proficiencies": {
       "armor": ["All armor", "Shields"],
       "weapons": ["Simple weapons", "Martial weapons"],
@@ -206,7 +258,14 @@
     "primaryAbility": ["Dexterity", "Wisdom"],
     "savingThrows": ["Strength", "Dexterity"],
     "skillChoices": 2,
-    "skillOptions": ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"],
+    "skillOptions": [
+      "Acrobatics",
+      "Athletics",
+      "History",
+      "Insight",
+      "Religion",
+      "Stealth"
+    ],
     "proficiencies": {
       "armor": [],
       "weapons": ["Simple weapons", "Shortswords"],
@@ -243,7 +302,14 @@
     "primaryAbility": ["Strength", "Charisma"],
     "savingThrows": ["Wisdom", "Charisma"],
     "skillChoices": 2,
-    "skillOptions": ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"],
+    "skillOptions": [
+      "Athletics",
+      "Insight",
+      "Intimidation",
+      "Medicine",
+      "Persuasion",
+      "Religion"
+    ],
     "proficiencies": {
       "armor": ["All armor", "Shields"],
       "weapons": ["Simple weapons", "Martial weapons"],
@@ -285,7 +351,16 @@
     "primaryAbility": ["Dexterity", "Wisdom"],
     "savingThrows": ["Strength", "Dexterity"],
     "skillChoices": 3,
-    "skillOptions": ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"],
+    "skillOptions": [
+      "Animal Handling",
+      "Athletics",
+      "Insight",
+      "Investigation",
+      "Nature",
+      "Perception",
+      "Stealth",
+      "Survival"
+    ],
     "proficiencies": {
       "armor": ["Light armor", "Medium armor", "Shields"],
       "weapons": ["Simple weapons", "Martial weapons"],
@@ -327,10 +402,28 @@
     "primaryAbility": ["Dexterity"],
     "savingThrows": ["Dexterity", "Intelligence"],
     "skillChoices": 4,
-    "skillOptions": ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"],
+    "skillOptions": [
+      "Acrobatics",
+      "Athletics",
+      "Deception",
+      "Insight",
+      "Intimidation",
+      "Investigation",
+      "Perception",
+      "Performance",
+      "Persuasion",
+      "Sleight of Hand",
+      "Stealth"
+    ],
     "proficiencies": {
       "armor": ["Light armor"],
-      "weapons": ["Simple weapons", "Hand crossbows", "Longswords", "Rapiers", "Shortswords"],
+      "weapons": [
+        "Simple weapons",
+        "Hand crossbows",
+        "Longswords",
+        "Rapiers",
+        "Shortswords"
+      ],
       "tools": ["Thieves' tools"],
       "savingThrows": ["Dexterity", "Intelligence"]
     },
@@ -364,10 +457,23 @@
     "primaryAbility": ["Charisma"],
     "savingThrows": ["Constitution", "Charisma"],
     "skillChoices": 2,
-    "skillOptions": ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"],
+    "skillOptions": [
+      "Arcana",
+      "Deception",
+      "Insight",
+      "Intimidation",
+      "Persuasion",
+      "Religion"
+    ],
     "proficiencies": {
       "armor": [],
-      "weapons": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light crossbows"],
+      "weapons": [
+        "Daggers",
+        "Darts",
+        "Slings",
+        "Quarterstaffs",
+        "Light crossbows"
+      ],
       "tools": [],
       "savingThrows": ["Constitution", "Charisma"]
     },
@@ -406,7 +512,15 @@
     "primaryAbility": ["Charisma"],
     "savingThrows": ["Wisdom", "Charisma"],
     "skillChoices": 2,
-    "skillOptions": ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"],
+    "skillOptions": [
+      "Arcana",
+      "Deception",
+      "History",
+      "Intimidation",
+      "Investigation",
+      "Nature",
+      "Religion"
+    ],
     "proficiencies": {
       "armor": ["Light armor"],
       "weapons": ["Simple weapons"],
@@ -448,10 +562,23 @@
     "primaryAbility": ["Intelligence"],
     "savingThrows": ["Intelligence", "Wisdom"],
     "skillChoices": 2,
-    "skillOptions": ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"],
+    "skillOptions": [
+      "Arcana",
+      "History",
+      "Insight",
+      "Investigation",
+      "Medicine",
+      "Religion"
+    ],
     "proficiencies": {
       "armor": [],
-      "weapons": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light crossbows"],
+      "weapons": [
+        "Daggers",
+        "Darts",
+        "Slings",
+        "Quarterstaffs",
+        "Light crossbows"
+      ],
       "tools": [],
       "savingThrows": ["Intelligence", "Wisdom"]
     },

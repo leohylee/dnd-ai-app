@@ -39,12 +39,7 @@
     "abilityScoreIncrease": {
       "dexterity": 2
     },
-    "traits": [
-      "Darkvision",
-      "Keen Senses",
-      "Fey Ancestry",
-      "Trance"
-    ],
+    "traits": ["Darkvision", "Keen Senses", "Fey Ancestry", "Trance"],
     "languages": ["Common", "Elvish"],
     "subraces": {
       "high": {
@@ -66,7 +61,12 @@
         "abilityScoreIncrease": {
           "charisma": 1
         },
-        "traits": ["Superior Darkvision", "Sunlight Sensitivity", "Drow Magic", "Drow Weapon Training"]
+        "traits": [
+          "Superior Darkvision",
+          "Sunlight Sensitivity",
+          "Drow Magic",
+          "Drow Weapon Training"
+        ]
       }
     }
   },
@@ -78,11 +78,7 @@
     "abilityScoreIncrease": {
       "dexterity": 2
     },
-    "traits": [
-      "Lucky",
-      "Brave",
-      "Halfling Nimbleness"
-    ],
+    "traits": ["Lucky", "Brave", "Halfling Nimbleness"],
     "languages": ["Common", "Halfling"],
     "subraces": {
       "lightfoot": {
@@ -135,11 +131,7 @@
       "strength": 2,
       "charisma": 1
     },
-    "traits": [
-      "Draconic Ancestry",
-      "Breath Weapon",
-      "Damage Resistance"
-    ],
+    "traits": ["Draconic Ancestry", "Breath Weapon", "Damage Resistance"],
     "languages": ["Common", "Draconic"],
     "subraces": {}
   },
@@ -151,10 +143,7 @@
     "abilityScoreIncrease": {
       "intelligence": 2
     },
-    "traits": [
-      "Darkvision",
-      "Gnome Cunning"
-    ],
+    "traits": ["Darkvision", "Gnome Cunning"],
     "languages": ["Common", "Gnomish"],
     "subraces": {
       "forest": {
@@ -182,11 +171,7 @@
       "charisma": 2,
       "choice": 2
     },
-    "traits": [
-      "Darkvision",
-      "Fey Ancestry",
-      "Extra Skills"
-    ],
+    "traits": ["Darkvision", "Fey Ancestry", "Extra Skills"],
     "languages": ["Common", "Elvish"],
     "subraces": {}
   },
@@ -199,11 +184,7 @@
       "strength": 2,
       "constitution": 1
     },
-    "traits": [
-      "Darkvision",
-      "Relentless Endurance",
-      "Savage Attacks"
-    ],
+    "traits": ["Darkvision", "Relentless Endurance", "Savage Attacks"],
     "languages": ["Common", "Orc"],
     "subraces": {}
   },
@@ -216,11 +197,7 @@
       "intelligence": 1,
       "charisma": 2
     },
-    "traits": [
-      "Darkvision",
-      "Hellish Resistance",
-      "Infernal Legacy"
-    ],
+    "traits": ["Darkvision", "Hellish Resistance", "Infernal Legacy"],
     "languages": ["Common", "Infernal"],
     "subraces": {}
   }
