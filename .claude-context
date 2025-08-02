@@ -14,7 +14,7 @@ Key Conventions:
 - Prisma for all database operations
 - Environment variables prefixed with NEXT_PUBLIC_ for client-side
 
-Project Structure Reference: ./docs/PROJECT_SPECIFICATION.md
+Project Structure Reference: ./docs/dnd-project-spec.md
 
 Current Phase: Initial Setup
 Style Guide:

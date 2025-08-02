@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Character {
+  id               String @id @default(cuid())
+  name             String
+  race             String
+  raceData         Json   // Store race details like traits, ability score increases
+  class            String
+  classData        Json   // Store class details like hit die, features
+  level            Int    @default(1)
+  experience       Int    @default(0)
+  
+  // Core ability scores
+  stats            Json   // { strength: number, dexterity: number, constitution: number, intelligence: number, wisdom: number, charisma: number }
+  
+  // Hit points
+  hp               Json   // { current: number, max: number }
+  
+  // Armor class
+  ac               Int    @default(10)
+  
+  // Proficiency bonus (calculated based on level)
+  proficiencyBonus Int    @default(2)
+  
+  // Skills, inventory, and spells as JSON arrays
+  skills           Json   // Array of Skill objects
+  inventory        Json   // Array of Item objects
+  spells           Json?  // Optional array of Spell objects
+  
+  // Character background and alignment
+  background       String
+  alignment        String
+  
+  // Additional character details
+  backstory        String?
+  notes            String?
+  
+  // Timestamps
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  // Relationships
+  campaigns        Campaign[]
+  
+  @@map("characters")
+}
+
+model Campaign {
+  id             String @id @default(cuid())
+  name           String
+  description    String?
+  
+  // Character relationship
+  characterId    String
+  character      Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  
+  // Current scene and game state
+  currentScene   Json   // Scene object with title, description, location, npcs, etc.
+  gameState      GameState?
+  
+  // Campaign metadata
+  sessionCount   Int    @default(0)
+  isActive       Boolean @default(true)
+  
+  // Timestamps
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  // Relationships
+  gameEvents     GameEvent[]
+  
+  @@index([characterId])
+  @@map("campaigns")
+}
+
+model GameEvent {
+  id             String @id @default(cuid())
+  
+  // Campaign relationship
+  campaignId     String
+  campaign       Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Event details
+  type           String   // 'action', 'dialogue', 'combat', 'exploration'
+  description    String
+  playerAction   String?
+  dmResponse     String?
+  
+  // Dice rolls associated with this event
+  diceRolls      Json?    // Array of DiceRoll objects
+  
+  // Additional event data
+  eventData      Json?    // Flexible field for storing event-specific data
+  
+  // Timestamps
+  timestamp      DateTime @default(now())
+  
+  @@index([campaignId])
+  @@index([timestamp])
+  @@map("game_events")
+}
+
+model GameState {
+  id               String @id @default(cuid())
+  
+  // Campaign relationship (one-to-one)
+  campaignId       String @unique
+  campaign         Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Current game state
+  currentLocation  String
+  
+  // Quests
+  activeQuests     Json   // Array of Quest objects
+  completedQuests  Json   // Array of Quest objects
+  
+  // Inventory and items
+  partyInventory   Json   // Array of shared party items
+  
+  // Game flags and variables
+  flags            Json   // Record<string, boolean> for story flags
+  variables        Json   // Record<string, any> for story variables
+  
+  // Combat state
+  combatState      Json?  // CombatState object when in combat
+  
+  // NPCs and relationships
+  knownNPCs        Json   // Array of NPC objects the party has met
+  npcRelationships Json   // Record<string, number> for relationship scores
+  
+  // Session summary for AI context
+  sessionSummary   String?
+  keyEvents        Json   // Array of important story events
+  
+  // Timestamps
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@map("game_states")
+}
+
+// Optional: Model for storing AI conversation context
+model AIContext {
+  id               String @id @default(cuid())
+  campaignId       String
+  
+  // AI context data
+  systemPrompt     String
+  conversationLog  Json   // Array of recent AI interactions
+  contextSummary   String // Summarized context for token efficiency
+  
+  // Timestamps
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@index([campaignId])
+  @@map("ai_contexts")
+}
+
+// Optional: Model for storing D&D 5e reference data
+model ReferenceData {
+  id       String @id @default(cuid())
+  type     String // 'race', 'class', 'spell', 'item', 'monster'
+  name     String
+  data     Json   // The actual reference data
+  
+  @@unique([type, name])
+  @@index([type])
+  @@map("reference_data")
+}
