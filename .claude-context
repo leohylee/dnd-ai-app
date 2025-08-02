@@ -1,0 +1,29 @@
+Project: D&D AI Application
+Type: Web Application
+Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Prisma ORM, OpenAI API
+Database: SQLite (dev), PostgreSQL (prod)
+Package Manager: npm
+Node Version: 18+
+
+Key Conventions:
+- Use @ path alias for imports (@/components, @/lib, @/types)
+- Strict TypeScript mode enabled
+- App directory structure (not pages)
+- Server Components by default, Client Components marked with 'use client'
+- Tailwind CSS for all styling (no CSS modules)
+- Prisma for all database operations
+- Environment variables prefixed with NEXT_PUBLIC_ for client-side
+
+Project Structure Reference: ./docs/PROJECT_SPECIFICATION.md
+
+Current Phase: Initial Setup
+Style Guide:
+- Components use PascalCase
+- Utilities use camelCase  
+- Types/Interfaces use PascalCase with 'I' or 'T' prefix optional
+- API routes follow RESTful conventions
+
+D&D Specific:
+- Strict D&D 5e rules compliance
+- All game mechanics must be accurate to official rules
+- Use official terminology (e.g., "Armor Class" not "Defense")
