@@ -1,11 +1,10 @@
 import OpenAI from 'openai'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/database/prisma'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-const prisma = new PrismaClient()
 
 export interface ReferenceDataContext {
   race?: any

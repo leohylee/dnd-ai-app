@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/database/prisma'
 import type { ReferenceDataResponse } from '@/types/character'
 
-const prisma = new PrismaClient()
+
 
 export async function GET() {
   try {

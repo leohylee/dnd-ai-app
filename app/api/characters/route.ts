@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/database/prisma'
 import { createCharacterSchema } from '@/lib/validations/character'
 import {
   calculateCharacterStats,
@@ -12,7 +12,6 @@ import type {
   CreateCharacterResponse,
 } from '@/types/character'
 
-const prisma = new PrismaClient()
 
 export async function POST(request: NextRequest) {
   try {
@@ -131,34 +130,36 @@ export async function POST(request: NextRequest) {
     }
 
     // Create the character in the database
+    const characterData = {
+      name,
+      race,
+      raceData: raceExists.data as any,
+      class: characterClass,
+      classData: classExists.data as any,
+      level: 1,
+      experience: 0,
+      stats: calculations.finalStats,
+      hp: calculations.hp,
+      ac: calculations.ac,
+      proficiencyBonus: calculations.proficiencyBonus,
+      skills: defaultSkills.map(skill => ({
+        name: skill,
+        ability: 'wisdom', // This would be determined by skill type
+        proficient: true,
+        expertise: false,
+      })),
+      inventory: [], // Start with empty inventory
+      spells: [], // Start with empty spells
+      background,
+      alignment,
+      personalityTraits: personalityTraits || [],
+      backstory: backstory || null,
+      notes: null,
+      ...(aiGeneratedBackground && { aiGeneratedBackground }),
+    }
+
     const character = await prisma.character.create({
-      data: {
-        name,
-        race,
-        raceData: raceExists.data as any,
-        class: characterClass,
-        classData: classExists.data as any,
-        level: 1,
-        experience: 0,
-        stats: calculations.finalStats,
-        hp: calculations.hp,
-        ac: calculations.ac,
-        proficiencyBonus: calculations.proficiencyBonus,
-        skills: defaultSkills.map(skill => ({
-          name: skill,
-          ability: 'wisdom', // This would be determined by skill type
-          proficient: true,
-          expertise: false,
-        })),
-        inventory: [], // Start with empty inventory
-        spells: [], // Start with empty spells
-        background,
-        alignment,
-        aiGeneratedBackground: aiGeneratedBackground || null,
-        personalityTraits: personalityTraits || [],
-        backstory: backstory || null,
-        notes: null,
-      },
+      data: characterData,
     })
 
     // Transform the response to match our interface

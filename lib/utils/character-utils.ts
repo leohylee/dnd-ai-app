@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/database/prisma'
 import type { AbilityScores } from '../validations/character'
 
-const prisma = new PrismaClient()
 
 export interface CharacterCalculations {
   finalStats: AbilityScores
