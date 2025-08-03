@@ -191,7 +191,9 @@ interface AIContext {
    - Character cards with detailed information display
    - Character creation workflow integration
 
-### ✅ Phase 3 - COMPLETED (Gameplay Features)
+### ⚠️ Phase 3 - 95% COMPLETE (Gameplay Features - DEBUGGING REQUIRED)
+
+**Status**: Core features implemented, critical bugs need immediate resolution
 
 1. **Campaign Management** ✅
    - Campaign creation with character selection
@@ -199,28 +201,80 @@ interface AIContext {
    - Auto-generated initial scenes with NPCs and actions
    - Campaign state persistence and management
    - Full CRUD API operations with complete character data integration
+   - Streamlined campaign flow (detail page converted to management dashboard)
 
-2. **AI Dungeon Master System** ✅
+2. **AI Dungeon Master System** ✅ ⚠️ *Needs Testing*
    - Real-time text-based interactions with GPT-4 powered DM
    - Context-aware narrative generation using campaign and character data
    - Dynamic scene management with NPCs, locations, and available actions
    - Multiple choice option generation based on player context
    - Custom action input processing with AI interpretation
    - Game event logging and campaign history tracking
+   - **Files**: `/lib/ai/dm-service.ts`, `/app/api/game-actions/route.ts`
+   - **Status**: ⚠️ Requires integration testing and debugging
 
-3. **Dice Rolling System** ✅
+3. **Dice Rolling System** ✅ 🚨 *BROKEN - Critical Fix Needed*
    - Complete D&D 5e dice mechanics (d4, d6, d8, d10, d12, d20, d100)
    - Advantage and disadvantage rolling
    - Skill checks, saving throws, attack rolls, and damage rolls
    - Automatic modifier calculations and formatting
    - Integration with AI DM for contextual dice roll suggestions
+   - **Files**: `/app/api/dice/roll/route.ts`, `/lib/utils/dice-utils.ts`
+   - **Status**: 🚨 **CRITICAL BUG**: Dice rolling not working in campaign play
 
-4. **Interactive Game Session Interface** ✅
+4. **Interactive Game Session Interface** ✅ ⚠️ *Needs Polish*
    - Real-time chat-style gameplay interface
    - Character stats sidebar with full ability scores, HP, AC, proficiency bonus
    - Quick dice rolling buttons for common rolls
    - Scene information display with atmosphere and environment details
    - Action choice buttons and custom text input for player actions
+   - Complete adventure log with historical actions and choice highlighting
+   - **Files**: `/app/campaign/[id]/play/page.tsx`
+   - **Status**: ⚠️ UI functional but dice integration broken
+
+5. **Dark Mode System** ✅ ⚠️ *Needs Verification*
+   - Complete theme system with light/dark/system preferences
+   - Theme context with localStorage persistence
+   - Theme toggle component in header navigation
+   - Tailwind dark mode configuration with CSS custom properties
+   - **Files**: `/lib/context/theme-context.tsx`, `/components/ui/theme-toggle.tsx`
+   - **Status**: ⚠️ Implemented but needs testing for UI consistency
+
+6. **Code Quality & Performance** ✅
+   - Consolidated point-buy validation logic
+   - Eliminated OpenAI client duplication
+   - Standardized API response patterns
+   - Optimized database queries (3 queries → 1 query)
+   - Character data transformation utilities
+   - Comprehensive error handling
+
+### 🚨 **IMMEDIATE PHASE 3 COMPLETION TASKS**
+
+**Critical Issues to Resolve:**
+
+1. **🎲 Fix Dice Rolling in Campaign Play** (CRITICAL)
+   - **Issue**: Dice roll buttons not working during gameplay
+   - **Files**: `/app/campaign/[id]/play/page.tsx` (lines 335-382)
+   - **Debug**: Check `rollDice` function and API integration
+   - **Test**: Verify dice buttons respond and display results
+
+2. **🌓 Debug Dark Mode Functionality** (HIGH)
+   - **Issue**: Theme switching may have UI inconsistencies
+   - **Files**: Theme context, CSS variables, component styling
+   - **Test**: Toggle themes across all pages, verify visual consistency
+
+3. **⚡ Test AI DM Integration** (HIGH)
+   - **Issue**: Verify AI responses work correctly in gameplay
+   - **Files**: `/lib/ai/dm-service.ts`, `/app/api/game-actions/route.ts`
+   - **Test**: Execute actions, verify AI responses generate properly
+
+4. **🧪 Comprehensive Testing** (MEDIUM)
+   - End-to-end user flow testing
+   - Mobile responsiveness verification
+   - Cross-browser compatibility testing
+
+**Expected Timeline**: 1-2 sessions for debugging and testing
+**Success Criteria**: All gameplay features functional, no critical bugs
 
 ### 📋 Phase 4 - FUTURE (Advanced Features)
 
@@ -486,13 +540,33 @@ The backend APIs are fully functional and can be tested with:
 
 ## Current System Status
 
-The D&D AI Application is now a **fully functional single-player D&D experience** with:
+The D&D AI Application is **95% complete** for Phase 3 with most core features implemented:
 
+### ✅ **Fully Functional Features:**
 - ✅ Complete character creation with AI assistance
 - ✅ Campaign management and persistence  
-- ✅ Real-time AI Dungeon Master interactions
-- ✅ Interactive gameplay with dice rolling mechanics
-- ✅ Comprehensive D&D 5e rule implementation
-- ✅ Responsive web interface for desktop and mobile
+- ✅ Campaign creation and dashboard interface
+- ✅ Interactive game session UI with adventure log
+- ✅ Complete D&D 5e rule implementation
+- ✅ Dark mode system implementation
+- ✅ Comprehensive code refactoring and optimization
 
-The application successfully bridges the gap between traditional tabletop D&D and modern AI-powered digital experiences, providing users with an immersive single-player campaign experience that maintains the core spirit of Dungeons & Dragons.
+### ⚠️ **Features Requiring Debug/Testing:**
+- 🚨 **Dice rolling system** - Implemented but broken in campaign play
+- ⚠️ **AI Dungeon Master responses** - Needs integration testing
+- ⚠️ **Dark mode UI consistency** - Needs cross-page verification
+- ⚠️ **End-to-end gameplay flow** - Needs comprehensive testing
+
+### 🎯 **Phase 3 Completion Status:**
+**Current**: 95% complete  
+**Remaining**: Critical bug fixes and testing  
+**Timeline**: 1-2 debugging sessions to reach 100%  
+**Blockers**: Dice rolling functionality, theme switching verification
+
+### 📋 **Next Session Priorities:**
+1. **CRITICAL**: Fix dice rolling in `/app/campaign/[id]/play/page.tsx`
+2. **HIGH**: Test and debug dark mode functionality
+3. **HIGH**: Verify AI DM integration in campaign play
+4. **MEDIUM**: Comprehensive user flow testing
+
+Once these issues are resolved, the application will be a **fully functional single-player D&D experience** that successfully bridges traditional tabletop D&D with modern AI-powered digital gameplay.
