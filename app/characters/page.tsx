@@ -107,12 +107,20 @@ export default function CharactersPage() {
             Manage and view your D&D characters
           </p>
         </div>
-        <Link href="/character/create">
-          <Button size="lg">
-            <Plus className="mr-2 h-4 w-4" />
-            Create New Character
-          </Button>
-        </Link>
+        <div className="flex gap-3">
+          <Link href="/campaign/create">
+            <Button size="lg" variant="outline">
+              <Plus className="mr-2 h-4 w-4" />
+              New Campaign
+            </Button>
+          </Link>
+          <Link href="/character-creation">
+            <Button size="lg">
+              <Plus className="mr-2 h-4 w-4" />
+              Create Character
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Search */}

@@ -17,7 +17,7 @@ export default function HomePage() {
           Create characters and embark on AI-powered D&D 5e adventures
         </p>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader>
               <CardTitle>Create Character</CardTitle>
@@ -43,6 +43,38 @@ export default function HomePage() {
               <Link href="/characters">
                 <Button variant="outline" className="w-full">
                   View Characters
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>My Campaigns</CardTitle>
+              <CardDescription>
+                Continue your adventures and manage campaigns
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/campaigns">
+                <Button variant="outline" className="w-full">
+                  View Campaigns
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Start Campaign</CardTitle>
+              <CardDescription>
+                Begin a new adventure with your characters
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/campaign/create">
+                <Button variant="secondary" className="w-full">
+                  New Campaign
                 </Button>
               </Link>
             </CardContent>

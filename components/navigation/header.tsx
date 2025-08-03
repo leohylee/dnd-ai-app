@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Home, Users, Plus } from 'lucide-react'
+import { Home, Users, Plus, Sword } from 'lucide-react'
 
 export function Header() {
   return (
@@ -27,10 +27,16 @@ export function Header() {
                   Characters
                 </Button>
               </Link>
-              <Link href="/character-creation">
+              <Link href="/campaigns">
+                <Button variant="ghost" size="sm">
+                  <Sword className="mr-2 h-4 w-4" />
+                  Campaigns
+                </Button>
+              </Link>
+              <Link href="/campaign/create">
                 <Button variant="ghost" size="sm">
                   <Plus className="mr-2 h-4 w-4" />
-                  Create
+                  New Campaign
                 </Button>
               </Link>
             </nav>
@@ -43,7 +49,12 @@ export function Header() {
                 <Users className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/character-creation">
+            <Link href="/campaigns">
+              <Button variant="ghost" size="sm">
+                <Sword className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/campaign/create">
               <Button variant="ghost" size="sm">
                 <Plus className="h-4 w-4" />
               </Button>
