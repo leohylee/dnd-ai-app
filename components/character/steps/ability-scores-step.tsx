@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Sparkles } from 'lucide-react'
 import { RandomizeButton } from '@/components/character/randomize-button'
+import { calculateTotalPointsUsed } from '@/lib/utils/point-buy'
 import type { CreateCharacterRequest } from '@/types/character'
 
 interface AbilityScoresStepProps {
@@ -62,14 +63,8 @@ export function AbilityScoresStep({
   }, [characterData.stats])
 
   useEffect(() => {
-    // Calculate points used according to D&D 5e point-buy rules
-    const used = Object.values(scores).reduce((total, score) => {
-      if (score <= 8) return total
-      if (score <= 13) return total + (score - 8) // 1 point each for 9-13
-      if (score === 14) return total + 7 // 6 points for 9-13, +1 extra for 14
-      if (score === 15) return total + 9 // 6 points for 9-13, +2 extra for 14-15
-      return total + Math.max(0, score - 8) // Fallback for scores > 15 (shouldn't happen)
-    }, 0)
+    // Use centralized point-buy calculation
+    const used = calculateTotalPointsUsed(scores)
     setPointsUsed(used)
 
     // Update character data only if scores actually changed
@@ -152,7 +147,7 @@ export function AbilityScoresStep({
 
     // Helper function to get the cost to increase a score by 1
     const getCostToIncrease = (currentScore: number): number => {
-      if (currentScore <= 12) return 1  // 8-13 cost 1 point each
+      if (currentScore <= 12) return 1 // 8-13 cost 1 point each
       if (currentScore === 13) return 2 // 14 costs 2 points (1 extra)
       if (currentScore === 14) return 2 // 15 costs 2 points (1 extra)
       return Infinity // Can't go above 15
@@ -172,7 +167,11 @@ export function AbilityScoresStep({
       const upgradeableAbilities = abilities.filter(ability => {
         const currentScore = newScores[ability]
         const costToIncrease = getCostToIncrease(currentScore)
-        return currentScore <= 15 && remainingPoints >= costToIncrease && costToIncrease !== Infinity
+        return (
+          currentScore <= 15 &&
+          remainingPoints >= costToIncrease &&
+          costToIncrease !== Infinity
+        )
       })
 
       if (upgradeableAbilities.length === 0) {

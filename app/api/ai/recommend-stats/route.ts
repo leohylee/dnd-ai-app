@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { aiRecommendStatsSchema } from '@/lib/validations/character'
 import { openaiService } from '@/lib/ai/openai-service'
+import { validatePointBuyStats, POINT_BUY_RULES } from '@/lib/utils/point-buy'
 import type {
   AIRecommendStatsRequest,
   AIRecommendStatsResponse,
@@ -30,32 +31,14 @@ export async function POST(request: NextRequest) {
         race
       )
 
-      // Validate the AI-generated scores follow D&D 5e point-buy rules
-      const validatePointBuy = (stats: Record<string, number>) => {
-        const pointsUsed = Object.values(stats).reduce((total, score) => {
-          if (score <= 8) return total
-          if (score <= 13) return total + (score - 8) // 1 point each for 9-13
-          if (score === 14) return total + 7 // 6 points for 9-13, +1 extra for 14
-          if (score === 15) return total + 9 // 6 points for 9-13, +2 extra for 14-15
-          return total + Math.max(0, score - 8) // Fallback for invalid scores
-        }, 0)
+      // Use centralized point-buy validation
+      const validation = validatePointBuyStats(recommendation.stats)
 
-        const maxScore = Math.max(...Object.values(stats))
-        const minScore = Math.min(...Object.values(stats))
+      if (!validation.valid) {
+        console.warn(
+          `AI generated invalid stats: ${validation.pointsUsed} points, max score: ${validation.maxScore}, min score: ${validation.minScore}`
+        )
 
-        return {
-          isValid: pointsUsed === 27 && maxScore <= 15 && minScore >= 8,
-          pointsUsed,
-          maxScore,
-          minScore
-        }
-      }
-
-      const validation = validatePointBuy(recommendation.stats)
-      
-      if (!validation.isValid) {
-        console.warn(`AI generated invalid stats: ${validation.pointsUsed} points, max score: ${validation.maxScore}, min score: ${validation.minScore}`)
-        
         // Generate fallback valid stats
         const fallbackStats = {
           strength: 13,
@@ -63,9 +46,9 @@ export async function POST(request: NextRequest) {
           constitution: 15,
           intelligence: 12,
           wisdom: 10,
-          charisma: 8
+          charisma: 8,
         }
-        
+
         return NextResponse.json({
           success: true,
           recommendedStats: fallbackStats,

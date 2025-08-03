@@ -5,6 +5,7 @@ import {
   calculateCharacterStats,
   validatePointBuyStats,
 } from '@/lib/utils/character-utils'
+import { transformCharacterForApi, transformCharactersForApi } from '@/lib/transformers/character-transformer'
 import type {
   CreateCharacterRequest,
   CreateCharacterResponse,
@@ -168,31 +169,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Transform the response to match our interface
-    const responseCharacter = {
-      id: character.id,
-      name: character.name,
-      race: character.raceData as any,
-      class: character.classData as any,
-      level: character.level,
-      stats: character.stats as any,
-      hp: character.hp as any,
-      ac: character.ac,
-      proficiencyBonus: character.proficiencyBonus,
-      skills: character.skills as any,
-      inventory: character.inventory as any,
-      spells: character.spells as any,
-      background: character.background,
-      alignment: character.alignment,
-      gender: character.gender,
-      aiGeneratedBackground:
-        (character as any).aiGeneratedBackground || undefined,
-      personalityTraits:
-        ((character as any).personalityTraits as string[]) || [],
-      backstory: character.backstory,
-      notes: character.notes,
-      createdAt: character.createdAt,
-      updatedAt: character.updatedAt,
-    }
+    const responseCharacter = transformCharacterForApi(character)
 
     return NextResponse.json(
       {
@@ -225,31 +202,7 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: 'desc' },
     })
 
-    const transformedCharacters = characters.map(character => ({
-      id: character.id,
-      name: character.name,
-      race: character.raceData as any,
-      class: character.classData as any,
-      level: character.level,
-      stats: character.stats as any,
-      hp: character.hp as any,
-      ac: character.ac,
-      proficiencyBonus: character.proficiencyBonus,
-      skills: character.skills as any,
-      inventory: character.inventory as any,
-      spells: character.spells as any,
-      background: character.background,
-      alignment: character.alignment,
-      gender: character.gender,
-      aiGeneratedBackground:
-        (character as any).aiGeneratedBackground || undefined,
-      personalityTraits:
-        ((character as any).personalityTraits as string[]) || [],
-      backstory: character.backstory,
-      notes: character.notes,
-      createdAt: character.createdAt,
-      updatedAt: character.updatedAt,
-    }))
+    const transformedCharacters = transformCharactersForApi(characters)
 
     return NextResponse.json({
       success: true,

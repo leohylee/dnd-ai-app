@@ -8,13 +8,25 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { ArrowLeft, Users, MapPin, Loader2, AlertCircle } from 'lucide-react'
-import type { Campaign, GetCampaignResponse } from '@/types/campaign'
+import {
+  ArrowLeft,
+  Users,
+  MapPin,
+  Loader2,
+  AlertCircle,
+  Play,
+} from 'lucide-react'
+import { useToast } from '@/components/ui/use-toast'
+import type { 
+  Campaign, 
+  GetCampaignResponse
+} from '@/types/campaign'
 
 export default function CampaignPage() {
   const params = useParams()
   const campaignId = params.id as string
-  
+  const { toast } = useToast()
+
   const [campaign, setCampaign] = useState<Campaign | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -44,6 +56,7 @@ export default function CampaignPage() {
     }
   }, [campaignId])
 
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -58,10 +71,10 @@ export default function CampaignPage() {
   if (error || !campaign) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Link href="/characters">
+        <Link href="/campaigns">
           <Button variant="ghost" className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Characters
+            Back to Campaigns
           </Button>
         </Link>
         <Alert variant="destructive">
@@ -73,22 +86,24 @@ export default function CampaignPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <Link href="/characters">
+        <Link href="/campaigns">
           <Button variant="ghost" className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Characters
+            Back to Campaigns
           </Button>
         </Link>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-3xl font-bold">{campaign.name}</h1>
             {campaign.description && (
-              <p className="text-muted-foreground mt-2">{campaign.description}</p>
+              <p className="mt-2 text-muted-foreground">
+                {campaign.description}
+              </p>
             )}
-            <div className="flex items-center gap-2 mt-2">
+            <div className="mt-2 flex items-center gap-2">
               <Badge variant={campaign.isActive ? 'default' : 'secondary'}>
                 {campaign.isActive ? 'Active' : 'Inactive'}
               </Badge>
@@ -97,14 +112,20 @@ export default function CampaignPage() {
           </div>
           <div className="flex gap-2">
             <Button variant="outline">Edit Campaign</Button>
-            <Button>Continue Adventure</Button>
+            <Button variant="outline">Export Campaign</Button>
+            <Link href={`/campaign/${campaignId}/play`}>
+              <Button size="lg">
+                <Play className="mr-2 h-4 w-4" />
+                Continue Adventure
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Current Scene */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 lg:col-span-2">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -114,24 +135,32 @@ export default function CampaignPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold">{campaign.currentScene.title}</h3>
-                <p className="text-sm text-muted-foreground mb-2">
+                <h3 className="text-lg font-semibold">
+                  {campaign.currentScene.title}
+                </h3>
+                <p className="mb-2 text-sm text-muted-foreground">
                   Location: {campaign.currentScene.location}
                 </p>
-                <p className="text-sm leading-relaxed">{campaign.currentScene.description}</p>
+                <p className="text-sm leading-relaxed">
+                  {campaign.currentScene.description}
+                </p>
               </div>
 
               {campaign.currentScene.atmosphere && (
                 <div>
-                  <h4 className="font-medium text-sm">Atmosphere</h4>
-                  <p className="text-sm text-muted-foreground">{campaign.currentScene.atmosphere}</p>
+                  <h4 className="text-sm font-medium">Atmosphere</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {campaign.currentScene.atmosphere}
+                  </p>
                 </div>
               )}
 
               {campaign.currentScene.environment && (
                 <div>
-                  <h4 className="font-medium text-sm">Environment</h4>
-                  <p className="text-sm text-muted-foreground">{campaign.currentScene.environment}</p>
+                  <h4 className="text-sm font-medium">Environment</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {campaign.currentScene.environment}
+                  </p>
                 </div>
               )}
 
@@ -140,27 +169,37 @@ export default function CampaignPage() {
               {/* NPCs */}
               {campaign.currentScene.npcs.length > 0 && (
                 <div>
-                  <h4 className="font-medium mb-3">Characters Present</h4>
+                  <h4 className="mb-3 font-medium">Characters Present</h4>
                   <div className="space-y-2">
-                    {campaign.currentScene.npcs.map((npc) => (
-                      <div key={npc.id} className="flex items-start gap-3 p-3 rounded-lg border">
+                    {campaign.currentScene.npcs.map(npc => (
+                      <div
+                        key={npc.id}
+                        className="flex items-start gap-3 rounded-lg border p-3"
+                      >
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium">{npc.name}</span>
                             {npc.race && (
-                              <Badge variant="outline" className="text-xs">{npc.race}</Badge>
+                              <Badge variant="outline" className="text-xs">
+                                {npc.race}
+                              </Badge>
                             )}
-                            <Badge 
+                            <Badge
                               variant={
-                                npc.disposition === 'friendly' ? 'default' : 
-                                npc.disposition === 'hostile' ? 'destructive' : 'secondary'
-                              } 
+                                npc.disposition === 'friendly'
+                                  ? 'default'
+                                  : npc.disposition === 'hostile'
+                                    ? 'destructive'
+                                    : 'secondary'
+                              }
                               className="text-xs"
                             >
                               {npc.disposition}
                             </Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground mt-1">{npc.description}</p>
+                          <p className="mt-1 text-sm text-muted-foreground">
+                            {npc.description}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -170,23 +209,29 @@ export default function CampaignPage() {
 
               <Separator />
 
-              {/* Available Actions */}
+              {/* Available Actions Preview (Read-only) */}
               {campaign.currentScene.availableActions.length > 0 && (
                 <div>
-                  <h4 className="font-medium mb-3">Available Actions</h4>
+                  <h4 className="mb-3 font-medium">Available Actions</h4>
                   <div className="grid gap-2">
-                    {campaign.currentScene.availableActions.map((action) => (
-                      <Button 
-                        key={action.id} 
-                        variant="outline" 
-                        className="justify-start text-left h-auto p-3"
+                    {campaign.currentScene.availableActions.map(action => (
+                      <div
+                        key={action.id}
+                        className="h-auto justify-start p-3 text-left rounded-md border bg-muted/30"
                       >
-                        <div>
-                          <div className="font-medium">{action.label}</div>
-                          <div className="text-sm text-muted-foreground">{action.description}</div>
+                        <div className="flex-1">
+                          <div className="font-medium text-muted-foreground">
+                            {action.label}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {action.description}
+                          </div>
                         </div>
-                      </Button>
+                      </div>
                     ))}
+                  </div>
+                  <div className="mt-3 text-xs text-muted-foreground">
+                    💡 Use "Continue Adventure" to start playing and select actions
                   </div>
                 </div>
               )}
@@ -208,8 +253,10 @@ export default function CampaignPage() {
               <CardContent className="space-y-3">
                 <div>
                   <h3 className="font-semibold">{campaign.character.name}</h3>
-                  <div className="flex gap-2 mt-1">
-                    <Badge variant="secondary">Level {campaign.character.level}</Badge>
+                  <div className="mt-1 flex gap-2">
+                    <Badge variant="secondary">
+                      Level {campaign.character.level}
+                    </Badge>
                     <Badge variant="outline">{campaign.character.race}</Badge>
                     <Badge variant="outline">{campaign.character.class}</Badge>
                   </div>
@@ -218,27 +265,49 @@ export default function CampaignPage() {
             </Card>
           )}
 
-          {/* Campaign Stats */}
+          {/* Campaign Management */}
           <Card>
             <CardHeader>
-              <CardTitle>Campaign Info</CardTitle>
+              <CardTitle>Campaign Management</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">Sessions:</span>
-                <span>{campaign.sessionCount}</span>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Sessions:</span>
+                  <span>{campaign.sessionCount}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Status:</span>
+                  <span>{campaign.isActive ? 'Active' : 'Inactive'}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Created:</span>
+                  <span>{new Date(campaign.createdAt).toLocaleDateString()}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Last Updated:</span>
+                  <span>{new Date(campaign.updatedAt).toLocaleDateString()}</span>
+                </div>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">Status:</span>
-                <span>{campaign.isActive ? 'Active' : 'Inactive'}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">Created:</span>
-                <span>{new Date(campaign.createdAt).toLocaleDateString()}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">Last Updated:</span>
-                <span>{new Date(campaign.updatedAt).toLocaleDateString()}</span>
+              
+              <Separator />
+              
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Actions</h4>
+                <div className="grid gap-2">
+                  <Button variant="outline" size="sm" className="justify-start">
+                    Edit Campaign Details
+                  </Button>
+                  <Button variant="outline" size="sm" className="justify-start">
+                    Export Adventure Log
+                  </Button>
+                  <Button variant="outline" size="sm" className="justify-start">
+                    Campaign Settings
+                  </Button>
+                  <Button variant="outline" size="sm" className="justify-start" disabled>
+                    Delete Campaign
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -251,11 +320,13 @@ export default function CampaignPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {campaign.gameEvents.slice(0, 5).map((event) => (
-                    <div key={event.id} className="text-sm p-2 rounded border">
+                  {campaign.gameEvents.slice(0, 5).map(event => (
+                    <div key={event.id} className="rounded border p-2 text-sm">
                       <div className="font-medium">{event.type}</div>
-                      <div className="text-muted-foreground">{event.description}</div>
-                      <div className="text-xs text-muted-foreground mt-1">
+                      <div className="text-muted-foreground">
+                        {event.description}
+                      </div>
+                      <div className="mt-1 text-xs text-muted-foreground">
                         {new Date(event.timestamp).toLocaleString()}
                       </div>
                     </div>

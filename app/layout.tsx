@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import { Header } from '@/components/navigation/header'
+import { ThemeProvider } from '@/lib/context/theme-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,13 +18,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="min-h-screen bg-background">
-          <Header />
-          <main>{children}</main>
-        </div>
-        <Toaster />
+        <ThemeProvider
+          defaultTheme="system"
+          storageKey="dnd-ui-theme"
+        >
+          <div className="min-h-screen bg-background">
+            <Header />
+            <main>{children}</main>
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

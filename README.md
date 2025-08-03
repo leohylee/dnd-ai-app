@@ -1,6 +1,6 @@
 # D&D AI Web Application
 
-An AI-powered D&D 5e web application built with Next.js, featuring intelligent character creation with OpenAI integration and comprehensive D&D 5e reference data.
+A complete AI-powered D&D 5e web application built with Next.js, featuring intelligent character creation, campaign management, and an AI Dungeon Master for immersive gameplay experiences.
 
 ## ✨ Features
 
@@ -17,6 +17,21 @@ An AI-powered D&D 5e web application built with Next.js, featuring intelligent c
 - **View All Characters** - Browse your created characters with detailed previews
 - **Character Cards** - Display essential character information at a glance
 - **Character Search & Filter** - Find characters by name, race, class, or level
+
+### 🏰 Campaign Management
+
+- **Create Campaigns** - Link characters to campaigns with AI-generated starting scenes
+- **Campaign Dashboard** - View campaign details, current scenes, and recent events
+- **Session Management** - Track session count and campaign progress
+- **Character Integration** - Full character stats and abilities available in campaigns
+
+### 🎮 AI Dungeon Master
+
+- **Interactive Gameplay** - Text-based D&D sessions with AI-powered DM responses
+- **Dynamic Storytelling** - Context-aware narrative generation based on player actions
+- **Skill Checks & Dice Rolling** - Complete D&D 5e mechanics with advantage/disadvantage
+- **Scene Management** - AI manages NPCs, locations, and available actions
+- **Game State Persistence** - All actions and events are saved for campaign continuity
 
 ### 📚 D&D 5e Reference Database
 
@@ -100,9 +115,16 @@ GET  /api/characters          # Get all characters (with pagination)
 ```
 POST /api/campaigns           # Create new campaign with initial scene
 GET  /api/campaigns           # Get all campaigns (with filtering)
-GET  /api/campaigns/[id]      # Get specific campaign details
+GET  /api/campaigns/[id]      # Get specific campaign details with full character data
 PATCH /api/campaigns/[id]     # Update campaign (scene, status, etc.)
 DELETE /api/campaigns/[id]    # Delete campaign
+```
+
+### AI Gameplay
+
+```
+POST /api/game-actions        # Process player actions and get AI DM responses
+POST /api/dice/roll          # Roll dice with D&D 5e mechanics
 ```
 
 ### D&D 5e Reference Data
@@ -150,6 +172,31 @@ curl -X POST http://localhost:3000/api/characters \
     }
   }'
 
+# Create a campaign
+curl -X POST http://localhost:3000/api/campaigns \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "The Lost Mine of Phandelver",
+    "description": "A classic D&D adventure",
+    "characterId": "character-id-here"
+  }'
+
+# Start a game session
+curl -X POST http://localhost:3000/api/game-actions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "campaignId": "campaign-id-here",
+    "action": "start_session"
+  }'
+
+# Roll dice
+curl -X POST http://localhost:3000/api/dice/roll \
+  -H "Content-Type: application/json" \
+  -d '{
+    "diceType": "d20",
+    "advantage": true
+  }'
+
 # Generate AI background
 curl -X POST http://localhost:3000/api/ai/generate-background \
   -H "Content-Type: application/json" \
@@ -189,19 +236,30 @@ npm run db:migrate    # Run migrations
 
 ```
 dnd-ai-app/
-├── app/api/                  # API routes
-│   ├── ai/                   # AI assistance endpoints
-│   ├── characters/           # Character CRUD
-│   └── reference/            # D&D 5e reference data
-├── components/               # React components
-├── data/dnd5e/              # D&D 5e JSON data files
+├── app/
+│   ├── api/                  # API routes
+│   │   ├── ai/               # AI assistance endpoints
+│   │   ├── campaigns/        # Campaign management
+│   │   ├── characters/       # Character CRUD
+│   │   ├── dice/            # Dice rolling mechanics
+│   │   ├── game-actions/    # AI DM gameplay
+│   │   └── reference/       # D&D 5e reference data
+│   ├── campaign/            # Campaign pages
+│   ├── campaigns/           # Campaign list
+│   ├── character-creation/  # Character creation UI
+│   └── characters/          # Character management
+├── components/              # React components
+│   ├── character/           # Character creation components
+│   ├── game/               # Gameplay components
+│   └── ui/                 # Reusable UI components
+├── data/dnd5e/             # D&D 5e JSON data files
 ├── lib/
-│   ├── ai/                   # OpenAI service
-│   ├── utils/                # Character calculations
-│   └── validations/          # Zod schemas
-├── prisma/                   # Database schema & migrations
-├── types/                    # TypeScript definitions
-└── docs/                     # Documentation
+│   ├── ai/                 # OpenAI & AI DM services
+│   ├── utils/              # Character & dice calculations
+│   └── validations/        # Zod schemas
+├── prisma/                 # Database schema & migrations
+├── types/                  # TypeScript definitions
+└── docs/                   # Documentation
 ```
 
 ## 🎯 Implementation Status
@@ -223,19 +281,24 @@ dnd-ai-app/
 - Complete character preview and validation
 - Responsive design for desktop and mobile
 
-### 🔄 In Progress (Phase 3)
+### ✅ Completed (Phase 3)
 
-- Campaign management system ✅
-- AI Dungeon Master interactions 🚧
-- Text-based gameplay interface 🚧
-- Dice rolling mechanics 📋
+- **Campaign Management System** - Full CRUD operations for campaigns
+- **AI Dungeon Master** - GPT-4 powered DM with context-aware responses
+- **Interactive Gameplay** - Text-based D&D sessions with real-time AI responses
+- **Dice Rolling System** - Complete D&D 5e mechanics with advantage/disadvantage
+- **Game State Persistence** - All actions and campaign progress saved
+- **Scene Management** - Dynamic NPCs, locations, and action choices
+- **Character Integration** - Full character stats available during gameplay
 
 ### 📋 Planned (Phase 4+)
 
 - Advanced AI features and dynamic story generation
-- Combat system with turn-based mechanics
+- Combat system with turn-based mechanics  
 - Character progression and leveling
 - Spell and ability usage tracking
+- Multi-player campaign support
+- Voice integration for immersive gameplay
 
 ## 🛠️ Available Scripts
 

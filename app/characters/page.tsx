@@ -57,10 +57,11 @@ export default function CharactersPage() {
     fetchCharacters()
   }, [])
 
-  const filteredCharacters = characters.filter(character =>
-    character.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    character.race.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    character.class.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCharacters = characters.filter(
+    character =>
+      character.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      character.race.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      character.class.name?.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const getAbilityModifier = (score: number) => {
@@ -79,7 +80,7 @@ export default function CharactersPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
           <p className="mt-4 text-muted-foreground">Loading characters...</p>
         </div>
       </div>
@@ -98,7 +99,7 @@ export default function CharactersPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-6">
+    <div className="container mx-auto space-y-6 px-4 py-8">
       {/* Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
@@ -125,7 +126,7 @@ export default function CharactersPage() {
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
         <Input
           placeholder="Search characters by name, race, or class..."
           value={searchTerm}
@@ -145,13 +146,15 @@ export default function CharactersPage() {
 
       {/* Characters Grid */}
       {filteredCharacters.length === 0 ? (
-        <Card className="text-center py-12">
+        <Card className="py-12 text-center">
           <CardContent>
             {searchTerm ? (
               <>
-                <Search className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No characters found</h3>
-                <p className="text-muted-foreground mb-4">
+                <Search className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <h3 className="mb-2 text-lg font-semibold">
+                  No characters found
+                </h3>
+                <p className="mb-4 text-muted-foreground">
                   No characters match your search criteria.
                 </p>
                 <Button variant="outline" onClick={() => setSearchTerm('')}>
@@ -160,12 +163,14 @@ export default function CharactersPage() {
               </>
             ) : (
               <>
-                <User className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No characters yet</h3>
-                <p className="text-muted-foreground mb-4">
+                <User className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <h3 className="mb-2 text-lg font-semibold">
+                  No characters yet
+                </h3>
+                <p className="mb-4 text-muted-foreground">
                   Create your first D&D character to get started!
                 </p>
-                <Link href="/character/create">
+                <Link href="/character-creation">
                   <Button>
                     <Plus className="mr-2 h-4 w-4" />
                     Create Your First Character
@@ -178,7 +183,10 @@ export default function CharactersPage() {
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCharacters.map(character => (
-            <Card key={character.id} className="hover:shadow-lg transition-shadow">
+            <Card
+              key={character.id}
+              className="transition-shadow hover:shadow-lg"
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -197,23 +205,29 @@ export default function CharactersPage() {
                   </div>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 {/* Basic Info */}
-                <div className="grid grid-cols-2 gap-2 text-sm">
+                <div className="grid grid-cols-1 gap-1 text-sm">
                   {character.gender && (
-                    <div className="flex justify-between">
-                      <span className="font-medium">Gender:</span>
-                      <span className="text-muted-foreground">{character.gender}</span>
+                    <div>
+                      <span className="font-medium">Gender: </span>
+                      <span className="text-muted-foreground">
+                        {character.gender}
+                      </span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="font-medium">Background:</span>
-                    <span className="text-muted-foreground">{character.background}</span>
+                  <div>
+                    <span className="font-medium">Background: </span>
+                    <span className="text-muted-foreground">
+                      {character.background}
+                    </span>
                   </div>
-                  <div className="flex justify-between col-span-2">
-                    <span className="font-medium">Alignment:</span>
-                    <span className="text-muted-foreground">{character.alignment}</span>
+                  <div>
+                    <span className="font-medium">Alignment: </span>
+                    <span className="text-muted-foreground">
+                      {character.alignment}
+                    </span>
                   </div>
                 </div>
 
@@ -226,7 +240,9 @@ export default function CharactersPage() {
                       <Heart className="h-3 w-3 text-red-500" />
                       <span className="text-xs font-medium">HP</span>
                     </div>
-                    <div className="text-lg font-bold">{character.hp.current}/{character.hp.max}</div>
+                    <div className="text-lg font-bold">
+                      {character.hp.current}/{character.hp.max}
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <div className="flex items-center justify-center gap-1">
@@ -240,7 +256,9 @@ export default function CharactersPage() {
                       <Zap className="h-3 w-3 text-yellow-500" />
                       <span className="text-xs font-medium">Prof</span>
                     </div>
-                    <div className="text-lg font-bold">+{character.proficiencyBonus}</div>
+                    <div className="text-lg font-bold">
+                      +{character.proficiencyBonus}
+                    </div>
                   </div>
                 </div>
 
@@ -274,7 +292,11 @@ export default function CharactersPage() {
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {character.skills.slice(0, 3).map((skill: any) => (
-                        <Badge key={skill.name} variant="outline" className="text-xs">
+                        <Badge
+                          key={skill.name}
+                          variant="outline"
+                          className="text-xs"
+                        >
                           {skill.name}
                         </Badge>
                       ))}

@@ -25,7 +25,7 @@ export const createCharacterSchema = z.object({
   personalityTraits: z.array(z.string()).optional(),
   backstory: z
     .string()
-    .max(2000, 'Backstory must be 2000 characters or less')
+    .max(5000, 'Backstory must be 5000 characters or less')
     .optional(),
   selectedSkills: z.array(z.string()).optional(),
 })

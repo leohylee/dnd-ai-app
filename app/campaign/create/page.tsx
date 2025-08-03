@@ -21,7 +21,10 @@ import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Users, Shield, Heart, Zap, Loader2 } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
 import type { Character } from '@/types/character'
-import type { CreateCampaignRequest, CreateCampaignResponse } from '@/types/campaign'
+import type {
+  CreateCampaignRequest,
+  CreateCampaignResponse,
+} from '@/types/campaign'
 
 interface CharactersResponse {
   success: boolean
@@ -32,7 +35,7 @@ interface CharactersResponse {
 export default function CreateCampaignPage() {
   const router = useRouter()
   const { toast } = useToast()
-  
+
   const [characters, setCharacters] = useState<Character[]>([])
   const [selectedCharacterId, setSelectedCharacterId] = useState('')
   const [campaignName, setCampaignName] = useState('')
@@ -65,11 +68,13 @@ export default function CreateCampaignPage() {
     fetchCharacters()
   }, [])
 
-  const selectedCharacter = characters.find(char => char.id === selectedCharacterId)
+  const selectedCharacter = characters.find(
+    char => char.id === selectedCharacterId
+  )
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!selectedCharacterId) {
       toast({
         title: 'Character Required',
@@ -111,7 +116,7 @@ export default function CreateCampaignPage() {
           title: 'Campaign Created!',
           description: `Your campaign "${campaignName}" has been created successfully.`,
         })
-        
+
         // Redirect to the campaign page
         router.push(`/campaign/${result.campaign.id}`)
       } else {
@@ -121,7 +126,10 @@ export default function CreateCampaignPage() {
       console.error('Error creating campaign:', err)
       toast({
         title: 'Creation Failed',
-        description: err instanceof Error ? err.message : 'Failed to create campaign. Please try again.',
+        description:
+          err instanceof Error
+            ? err.message
+            : 'Failed to create campaign. Please try again.',
         variant: 'destructive',
       })
     } finally {
@@ -159,7 +167,7 @@ export default function CreateCampaignPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto max-w-4xl px-4 py-8">
       {/* Header */}
       <div className="mb-8">
         <Link href="/characters">
@@ -169,17 +177,17 @@ export default function CreateCampaignPage() {
           </Button>
         </Link>
         <h1 className="text-3xl font-bold">Create New Campaign</h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="mt-2 text-muted-foreground">
           Start a new adventure with one of your characters
         </p>
       </div>
 
       {characters.length === 0 ? (
         <Card>
-          <CardContent className="text-center py-12">
-            <Users className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No Characters Found</h3>
-            <p className="text-muted-foreground mb-4">
+          <CardContent className="py-12 text-center">
+            <Users className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <h3 className="mb-2 text-lg font-semibold">No Characters Found</h3>
+            <p className="mb-4 text-muted-foreground">
               You need to create a character before starting a campaign.
             </p>
             <Link href="/character-creation">
@@ -188,7 +196,7 @@ export default function CreateCampaignPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Campaign Form */}
           <div className="space-y-6">
             <Card>
@@ -226,14 +234,18 @@ export default function CreateCampaignPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="character">Select Character *</Label>
-                    <Select value={selectedCharacterId} onValueChange={setSelectedCharacterId}>
+                    <Select
+                      value={selectedCharacterId}
+                      onValueChange={setSelectedCharacterId}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Choose a character" />
                       </SelectTrigger>
                       <SelectContent>
                         {characters.map(character => (
                           <SelectItem key={character.id} value={character.id}>
-                            {character.name} - Level {character.level} {character.race.name} {character.class.name}
+                            {character.name} - Level {character.level}{' '}
+                            {character.race.name} {character.class.name}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -264,11 +276,19 @@ export default function CreateCampaignPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">{selectedCharacter.name}</h3>
+                    <h3 className="text-lg font-semibold">
+                      {selectedCharacter.name}
+                    </h3>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary">Level {selectedCharacter.level}</Badge>
-                      <Badge variant="outline">{selectedCharacter.race.name}</Badge>
-                      <Badge variant="outline">{selectedCharacter.class.name}</Badge>
+                      <Badge variant="secondary">
+                        Level {selectedCharacter.level}
+                      </Badge>
+                      <Badge variant="outline">
+                        {selectedCharacter.race.name}
+                      </Badge>
+                      <Badge variant="outline">
+                        {selectedCharacter.class.name}
+                      </Badge>
                     </div>
                   </div>
 
@@ -279,16 +299,22 @@ export default function CreateCampaignPage() {
                     {selectedCharacter.gender && (
                       <div className="flex justify-between">
                         <span className="font-medium">Gender:</span>
-                        <span className="text-muted-foreground">{selectedCharacter.gender}</span>
+                        <span className="text-muted-foreground">
+                          {selectedCharacter.gender}
+                        </span>
                       </div>
                     )}
                     <div className="flex justify-between">
                       <span className="font-medium">Background:</span>
-                      <span className="text-muted-foreground">{selectedCharacter.background}</span>
+                      <span className="text-muted-foreground">
+                        {selectedCharacter.background}
+                      </span>
                     </div>
-                    <div className="flex justify-between col-span-2">
+                    <div className="col-span-2 flex justify-between">
                       <span className="font-medium">Alignment:</span>
-                      <span className="text-muted-foreground">{selectedCharacter.alignment}</span>
+                      <span className="text-muted-foreground">
+                        {selectedCharacter.alignment}
+                      </span>
                     </div>
                   </div>
 
@@ -301,21 +327,28 @@ export default function CreateCampaignPage() {
                         <Heart className="h-3 w-3 text-red-500" />
                         <span className="text-xs font-medium">HP</span>
                       </div>
-                      <div className="text-lg font-bold">{selectedCharacter.hp.current}/{selectedCharacter.hp.max}</div>
+                      <div className="text-lg font-bold">
+                        {selectedCharacter.hp.current}/
+                        {selectedCharacter.hp.max}
+                      </div>
                     </div>
                     <div className="space-y-1">
                       <div className="flex items-center justify-center gap-1">
                         <Shield className="h-3 w-3 text-blue-500" />
                         <span className="text-xs font-medium">AC</span>
                       </div>
-                      <div className="text-lg font-bold">{selectedCharacter.ac}</div>
+                      <div className="text-lg font-bold">
+                        {selectedCharacter.ac}
+                      </div>
                     </div>
                     <div className="space-y-1">
                       <div className="flex items-center justify-center gap-1">
                         <Zap className="h-3 w-3 text-yellow-500" />
                         <span className="text-xs font-medium">Prof</span>
                       </div>
-                      <div className="text-lg font-bold">+{selectedCharacter.proficiencyBonus}</div>
+                      <div className="text-lg font-bold">
+                        +{selectedCharacter.proficiencyBonus}
+                      </div>
                     </div>
                   </div>
 
@@ -323,27 +356,29 @@ export default function CreateCampaignPage() {
 
                   {/* Ability Scores */}
                   <div className="grid grid-cols-3 gap-2 text-xs">
-                    {Object.entries(selectedCharacter.stats).map(([ability, score]) => {
-                      const modifier = getAbilityModifier(score as number)
-                      return (
-                        <div key={ability} className="text-center">
-                          <div className="font-medium capitalize text-muted-foreground">
-                            {ability.substring(0, 3)}
+                    {Object.entries(selectedCharacter.stats).map(
+                      ([ability, score]) => {
+                        const modifier = getAbilityModifier(score as number)
+                        return (
+                          <div key={ability} className="text-center">
+                            <div className="font-medium capitalize text-muted-foreground">
+                              {ability.substring(0, 3)}
+                            </div>
+                            <div className="font-bold">{score}</div>
+                            <div className="text-muted-foreground">
+                              {formatModifier(modifier)}
+                            </div>
                           </div>
-                          <div className="font-bold">{score}</div>
-                          <div className="text-muted-foreground">
-                            {formatModifier(modifier)}
-                          </div>
-                        </div>
-                      )
-                    })}
+                        )
+                      }
+                    )}
                   </div>
                 </CardContent>
               </Card>
             ) : (
               <Card>
-                <CardContent className="text-center py-12">
-                  <Users className="mx-auto h-8 w-8 text-muted-foreground mb-4" />
+                <CardContent className="py-12 text-center">
+                  <Users className="mx-auto mb-4 h-8 w-8 text-muted-foreground" />
                   <p className="text-muted-foreground">
                     Select a character to see their details
                   </p>

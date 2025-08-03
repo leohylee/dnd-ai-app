@@ -14,6 +14,7 @@ export interface ReferenceDataContext {
 export class OpenAIService {
   /**
    * Get reference data from the database to provide context for AI prompts
+   * Optimized to use a single query when multiple types are requested
    */
   private async getReferenceData(
     race?: string,
@@ -23,32 +24,42 @@ export class OpenAIService {
     const context: ReferenceDataContext = {}
 
     try {
+      // Build query conditions for all requested data types
+      const conditions = []
+      
       if (race) {
-        const raceData = await prisma.referenceData.findFirst({
-          where: { type: 'race', name: { equals: race, mode: 'insensitive' } },
-        })
-        context.race = raceData?.data
+        conditions.push({ type: 'race', name: { equals: race, mode: 'insensitive' } })
       }
-
       if (characterClass) {
-        const classData = await prisma.referenceData.findFirst({
-          where: {
-            type: 'class',
-            name: { equals: characterClass, mode: 'insensitive' },
-          },
-        })
-        context.class = classData?.data
+        conditions.push({ type: 'class', name: { equals: characterClass, mode: 'insensitive' } })
+      }
+      if (background) {
+        conditions.push({ type: 'background', name: { equals: background, mode: 'insensitive' } })
       }
 
-      if (background) {
-        const backgroundData = await prisma.referenceData.findFirst({
-          where: {
-            type: 'background',
-            name: { equals: background, mode: 'insensitive' },
-          },
-        })
-        context.background = backgroundData?.data
-      }
+      // Early return if no data requested
+      if (conditions.length === 0) return context
+
+      // Single optimized query for all reference data
+      const referenceData = await prisma.referenceData.findMany({
+        where: { OR: conditions },
+        select: {
+          type: true,
+          name: true,
+          data: true,
+        }
+      })
+
+      // Map results to context
+      referenceData.forEach(item => {
+        if (item.type === 'race' && race && item.name.toLowerCase() === race.toLowerCase()) {
+          context.race = item.data
+        } else if (item.type === 'class' && characterClass && item.name.toLowerCase() === characterClass.toLowerCase()) {
+          context.class = item.data  
+        } else if (item.type === 'background' && background && item.name.toLowerCase() === background.toLowerCase()) {
+          context.background = item.data
+        }
+      })
     } catch (error) {
       console.error('Error fetching reference data:', error)
     }
@@ -287,6 +298,94 @@ Return a JSON object with:
     } catch (error) {
       console.error('Error recommending ability scores:', error)
       throw new Error('Failed to recommend ability scores')
+    }
+  }
+
+  /**
+   * Recommend skills based on character details
+   */
+  async recommendSkills(
+    race: string,
+    characterClass: string,
+    background: string,
+    availableSkills: string[],
+    maxSkills: number,
+    alignment?: string,
+    backstory?: string
+  ): Promise<{ recommendedSkills: string[]; reasoning: string }> {
+    const prompt = `You are a D&D 5e character creation expert. Based on the character details below, recommend exactly ${maxSkills} skills from the available options that would best fit this character.
+
+Character Details:
+- Race: ${race}
+- Class: ${characterClass}
+- Background: ${background}
+- Alignment: ${alignment || 'Not specified'}
+${backstory ? `- Backstory: ${backstory}` : ''}
+
+Available Skills to Choose From:
+${availableSkills.map(skill => `- ${skill}`).join('\n')}
+
+Please recommend exactly ${maxSkills} skills that would be most thematically appropriate and mechanically useful for this character. Consider:
+1. The character's class and its typical role in combat and exploration
+2. The character's background and what skills would support their story
+3. The character's race and any natural inclinations
+4. How the skills complement each other for a well-rounded character
+
+Format your response as:
+
+RECOMMENDED SKILLS:
+[List exactly ${maxSkills} skills from the available options]
+
+REASONING:
+[Brief explanation for why these skills fit the character]`
+
+    try {
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a helpful D&D 5e expert assistant that provides skill recommendations for character creation.',
+          },
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        max_tokens: 500,
+        temperature: 0.7,
+      })
+
+      const response = completion.choices[0]?.message?.content
+      if (!response) {
+        throw new Error('No response from OpenAI')
+      }
+
+      // Parse the response to extract skills and reasoning
+      const skillsMatch = response.match(
+        /RECOMMENDED SKILLS:\s*([\s\S]*?)(?:\n\nREASONING:|$)/i
+      )
+      const reasoningMatch = response.match(/REASONING:\s*([\s\S]*?)$/i)
+
+      let recommendedSkills: string[] = []
+      if (skillsMatch && skillsMatch[1]) {
+        // Extract skills from the response, handling various formats
+        recommendedSkills = skillsMatch[1]
+          .split('\n')
+          .map(line => line.replace(/^[-*•]\s*/, '').trim())
+          .filter(skill => skill && availableSkills.includes(skill))
+          .slice(0, maxSkills)
+      }
+
+      const reasoning =
+        reasoningMatch && reasoningMatch[1]
+          ? reasoningMatch[1].trim()
+          : 'Skills recommended based on character class, background, and race synergy.'
+
+      return { recommendedSkills, reasoning }
+    } catch (error) {
+      console.error('Error generating skill recommendations:', error)
+      throw new Error('Failed to generate skill recommendations')
     }
   }
 

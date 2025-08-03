@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/database/prisma'
-import { updateCampaignSchema, campaignIdSchema } from '@/lib/validations/campaign'
+import {
+  updateCampaignSchema,
+  campaignIdSchema,
+} from '@/lib/validations/campaign'
 import type {
   GetCampaignResponse,
   UpdateCampaignRequest,
@@ -10,7 +13,7 @@ import type {
 
 // Get a specific campaign by ID
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -28,15 +31,7 @@ export async function GET(
     const campaign = await prisma.campaign.findUnique({
       where: { id: params.id },
       include: {
-        character: {
-          select: {
-            id: true,
-            name: true,
-            race: true,
-            class: true,
-            level: true,
-          },
-        },
+        character: true,
         gameState: true,
         gameEvents: {
           orderBy: { timestamp: 'desc' },
@@ -130,15 +125,7 @@ export async function PATCH(
         updatedAt: new Date(),
       },
       include: {
-        character: {
-          select: {
-            id: true,
-            name: true,
-            race: true,
-            class: true,
-            level: true,
-          },
-        },
+        character: true,
         gameState: true,
         gameEvents: {
           orderBy: { timestamp: 'desc' },
@@ -171,7 +158,7 @@ export async function PATCH(
 
 // Delete a campaign
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {

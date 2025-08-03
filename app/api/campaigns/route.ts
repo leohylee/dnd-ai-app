@@ -61,7 +61,8 @@ export async function POST(request: NextRequest) {
           race: 'Human',
           role: 'Tavern Keeper',
           disposition: 'friendly',
-          description: 'A cheerful middle-aged man with a warm smile and stories to tell.',
+          description:
+            'A cheerful middle-aged man with a warm smile and stories to tell.',
           dialogue: [
             'Welcome to the Crossroads Tavern! What can I do for you today?',
             'I hear there are opportunities for adventurers in these parts.',
@@ -74,13 +75,15 @@ export async function POST(request: NextRequest) {
           id: 'action-talk-innkeeper',
           type: 'dialogue',
           label: 'Talk to the Innkeeper',
-          description: 'Strike up a conversation with Gareth about local news and opportunities.',
+          description:
+            'Strike up a conversation with Gareth about local news and opportunities.',
         },
         {
           id: 'action-explore-tavern',
           type: 'exploration',
           label: 'Explore the Tavern',
-          description: 'Look around the tavern for interesting people or information.',
+          description:
+            'Look around the tavern for interesting people or information.',
         },
         {
           id: 'action-leave-tavern',
@@ -90,7 +93,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       atmosphere: 'Warm and welcoming with the scent of hearth fires and ale',
-      environment: 'A cozy tavern with wooden tables, flickering candles, and friendly chatter',
+      environment:
+        'A cozy tavern with wooden tables, flickering candles, and friendly chatter',
     }
 
     // Create the campaign

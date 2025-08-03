@@ -199,3 +199,62 @@ export interface UpdateCampaignResponse {
   campaign?: Campaign
   error?: string
 }
+
+// Game Action Types
+export interface GameActionRequest {
+  campaignId: string
+  actionId?: string
+  customAction?: string
+  playerInput: string
+}
+
+export interface GameActionResponse {
+  success: boolean
+  narrative: string
+  newScene?: Scene
+  choices: ActionOption[]
+  diceRollRequired?: {
+    type: 'ability_check' | 'skill_check' | 'saving_throw' | 'attack'
+    ability?: string
+    skill?: string
+    difficulty: number
+    description: string
+  }
+  gameEvent?: Partial<GameEvent>
+  error?: string
+}
+
+export interface StartSessionRequest {
+  campaignId: string
+  action: 'start_session'
+}
+
+export interface DiceRollRequest {
+  type?:
+    | 'ability_check'
+    | 'skill_check'
+    | 'saving_throw'
+    | 'attack'
+    | 'damage'
+    | 'initiative'
+  diceType?: 'd4' | 'd6' | 'd8' | 'd10' | 'd12' | 'd20' | 'd100'
+  count?: number
+  modifier?: number
+  advantage?: boolean
+  disadvantage?: boolean
+  purpose?: string
+  skill?: string
+  abilityScore?: number
+  proficiencyBonus?: number
+  isProficient?: boolean
+  skillName?: string
+  damageType?: string
+  dexterityScore?: number
+}
+
+export interface DiceRollResponse {
+  success: boolean
+  roll?: DiceRoll
+  formatted?: string
+  error?: string
+}

@@ -148,35 +148,9 @@ export async function calculateCharacterStats(
   }
 }
 
-/**
- * Validate ability scores for point buy system
- */
-export function validatePointBuyStats(stats: AbilityScores): {
-  valid: boolean
-  error?: string
-} {
-  const values = Object.values(stats)
-
-  // Check if all values are between 8 and 15 (before racial bonuses)
-  if (values.some(val => val < 8 || val > 15)) {
-    return {
-      valid: false,
-      error: 'All ability scores must be between 8 and 15',
-    }
-  }
-
-  // Calculate point buy cost
-  const cost = values.reduce((total, score) => {
-    if (score >= 14) return total + (score - 8) + 1 // 14 and 15 cost extra
-    return total + Math.max(0, score - 8)
-  }, 0)
-
-  if (cost > 27) {
-    return { valid: false, error: 'Point buy total exceeds 27 points' }
-  }
-
-  return { valid: true }
-}
+// Point-buy validation moved to dedicated utility
+// Import and re-export for backward compatibility
+export { validatePointBuyStats } from './point-buy'
 
 /**
  * Generate default skills based on class and background
