@@ -95,6 +95,16 @@ POST /api/characters          # Create character with AI assistance
 GET  /api/characters          # Get all characters (with pagination)
 ```
 
+### Campaign Management
+
+```
+POST /api/campaigns           # Create new campaign with initial scene
+GET  /api/campaigns           # Get all campaigns (with filtering)
+GET  /api/campaigns/[id]      # Get specific campaign details
+PATCH /api/campaigns/[id]     # Update campaign (scene, status, etc.)
+DELETE /api/campaigns/[id]    # Delete campaign
+```
+
 ### D&D 5e Reference Data
 
 ```
@@ -109,6 +119,8 @@ GET /api/reference/backgrounds # Get all D&D 5e backgrounds
 POST /api/ai/generate-background # Generate AI character background
 POST /api/ai/suggest-traits     # Get AI personality trait suggestions
 POST /api/ai/recommend-stats    # Get AI ability score recommendations
+POST /api/ai/recommend-skills   # Get AI skill recommendations
+POST /api/ai/generate-name      # Generate character names by race/gender
 ```
 
 ## 🧪 Testing the APIs
@@ -203,19 +215,27 @@ dnd-ai-app/
 - Type-safe APIs with Zod validation
 - Character stat calculations and point-buy validation
 
-### 🔄 In Progress (Phase 2)
+### ✅ Completed (Phase 2)
 
-- Frontend character creation UI
-- React components for reference data browsing
+- Frontend character creation UI with multi-step wizard
 - Character management and viewing system
+- AI-powered skill recommendations and ability score optimization
+- Complete character preview and validation
+- Responsive design for desktop and mobile
 
-### 📋 Planned (Phase 3+)
+### 🔄 In Progress (Phase 3)
 
-- Campaign management system
-- AI Dungeon Master interactions
-- Dice rolling mechanics
-- Combat system
-- Character progression
+- Campaign management system ✅
+- AI Dungeon Master interactions 🚧
+- Text-based gameplay interface 🚧
+- Dice rolling mechanics 📋
+
+### 📋 Planned (Phase 4+)
+
+- Advanced AI features and dynamic story generation
+- Combat system with turn-based mechanics
+- Character progression and leveling
+- Spell and ability usage tracking
 
 ## 🛠️ Available Scripts
 
