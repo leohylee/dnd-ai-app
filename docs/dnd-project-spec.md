@@ -157,7 +157,7 @@ interface AIContext {
    - Complete character creation API with validation
    - AI-assisted character background generation
    - Personality trait suggestions
-   - Ability score recommendations  
+   - Ability score recommendations
    - Point-buy validation system
 
 2. **D&D 5e Reference Data** ✅
@@ -217,6 +217,7 @@ interface AIContext {
 ## Key Features Implemented
 
 ### Character Creation
+
 - **AI-Powered Background Generation** - Contextual backstories using D&D lore
 - **Smart Ability Score Recommendations** - Class-optimized stat distributions
 - **Personality Trait Suggestions** - Race/class/background appropriate traits
@@ -224,16 +225,19 @@ interface AIContext {
 - **Comprehensive Character Calculations** - HP, AC, proficiency bonus, racial bonuses
 
 ### D&D 5e Compliance
+
 - **Complete Reference Database** - 250+ official D&D 5e items
 - **Accurate Stat Calculations** - Proper racial bonuses and class features
 - **Rules Validation** - Enforces D&D 5e character creation rules
 
 ### AI Integration
+
 - **OpenAI GPT-4** - Advanced natural language generation
 - **Context-Aware Prompts** - AI uses actual D&D reference data
 - **Lore Consistency** - Maintains authentic D&D universe feel
 
 ### Developer Experience
+
 - **Type Safety** - Full TypeScript coverage with Zod validation
 - **Database Seeding** - Automated D&D 5e data import
 - **API Documentation** - Comprehensive endpoint documentation
@@ -250,20 +254,24 @@ interface AIContext {
 ## API Endpoints
 
 ### Character Management
+
 - `POST /api/characters` - Create character with AI assistance
 - `GET /api/characters` - Get all characters (with pagination)
 
 ### D&D 5e Reference Data
+
 - `GET /api/reference/races` - Get all D&D 5e races
-- `GET /api/reference/classes` - Get all D&D 5e classes  
+- `GET /api/reference/classes` - Get all D&D 5e classes
 - `GET /api/reference/backgrounds` - Get all D&D 5e backgrounds
 
 ### AI Assistance (OpenAI Integration)
+
 - `POST /api/ai/generate-background` - Generate AI character background
 - `POST /api/ai/suggest-traits` - Get AI personality trait suggestions
 - `POST /api/ai/recommend-stats` - Get AI ability score recommendations
 
 ### Campaign Management (Future)
+
 - `POST /api/campaigns` - Start new campaign
 - `GET /api/campaigns/:id` - Load campaign
 - `POST /api/game-actions` - Process player action
@@ -271,14 +279,16 @@ interface AIContext {
 ## Database Schema
 
 ### Implemented Tables
+
 - **Characters** - Complete character data with AI-generated fields
-- **Campaigns** - Campaign metadata and current scene  
+- **Campaigns** - Campaign metadata and current scene
 - **GameEvents** - Event logging for campaign history
 - **GameState** - Current game state and context
 - **ReferenceData** - D&D 5e reference data (races, classes, spells, etc.)
 - **AIContext** - AI conversation context and summaries
 
 ### Key Features
+
 - **PostgreSQL** with Prisma ORM
 - **JSON fields** for flexible data storage (stats, inventory, etc.)
 - **Seeded D&D 5e data** - 250+ items including races, classes, spells, backgrounds, equipment, and skills
@@ -295,11 +305,13 @@ NEXT_PUBLIC_APP_URL=
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - PostgreSQL database
 - OpenAI API key
 
 ### Environment Setup
+
 ```bash
 # Install dependencies
 npm install
@@ -318,7 +330,9 @@ npm run dev
 ```
 
 ### Testing the APIs
+
 The backend APIs are fully functional and can be tested with:
+
 - **Postman** - Import the API collection
 - **curl** - Use provided examples in PROJECT_OVERVIEW.md
 - **Frontend integration** - Connect React components to existing endpoints

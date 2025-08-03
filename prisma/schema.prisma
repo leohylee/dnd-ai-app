@@ -40,6 +40,7 @@ model Character {
   // Character background and alignment
   background       String
   alignment        String
+  gender           String?
   
   // Additional character details
   backstory              String?

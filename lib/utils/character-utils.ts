@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/database/prisma'
 import type { AbilityScores } from '../validations/character'
 
-
 export interface CharacterCalculations {
   finalStats: AbilityScores
   hp: { current: number; max: number }

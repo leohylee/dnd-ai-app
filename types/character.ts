@@ -20,6 +20,7 @@ export interface Character {
   spells?: Spell[]
   background: string
   alignment: string
+  gender?: string
   aiGeneratedBackground?: string
   personalityTraits: string[]
   backstory?: string
@@ -88,6 +89,7 @@ export interface CreateCharacterRequest {
   class: string
   background: string
   alignment: string
+  gender?: string
   stats: {
     strength: number
     dexterity: number
@@ -98,7 +100,7 @@ export interface CreateCharacterRequest {
   }
   personalityTraits?: string[]
   backstory?: string
-  useAiBackground?: boolean
+  selectedSkills?: string[]
 }
 
 export interface CreateCharacterResponse {
@@ -156,5 +158,34 @@ export interface AIRecommendStatsResponse {
 export interface ReferenceDataResponse<T> {
   success: boolean
   data?: T[]
+  error?: string
+}
+
+export interface SkillReference {
+  name: string
+  ability: string
+}
+
+export interface SkillsResponse {
+  success: boolean
+  data?: SkillReference[]
+  error?: string
+}
+
+export interface AIRecommendSkillsRequest {
+  race: string
+  class: string
+  background: string
+  alignment?: string
+  availableSkills: string[]
+  maxSkills: number
+  backstory?: string
+}
+
+export interface AIRecommendSkillsResponse {
+  success: boolean
+  recommendedSkills?: string[]
+  reasoning?: string
+  maxSkills?: number
   error?: string
 }

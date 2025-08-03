@@ -3,15 +3,12 @@ import { prisma } from '@/lib/database/prisma'
 import { createCharacterSchema } from '@/lib/validations/character'
 import {
   calculateCharacterStats,
-  getDefaultSkills,
   validatePointBuyStats,
 } from '@/lib/utils/character-utils'
-import { openaiService } from '@/lib/ai/openai-service'
 import type {
   CreateCharacterRequest,
   CreateCharacterResponse,
 } from '@/types/character'
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,10 +32,11 @@ export async function POST(request: NextRequest) {
       class: characterClass,
       background,
       alignment,
+      gender,
       stats,
       personalityTraits = [],
       backstory,
-      useAiBackground = false,
+      selectedSkills = [],
     } = validation.data
 
     // Validate point buy system
@@ -109,25 +107,37 @@ export async function POST(request: NextRequest) {
       characterClass
     )
 
-    // Get default skills
-    const defaultSkills = await getDefaultSkills(characterClass, background)
-
-    // Generate AI background if requested
-    let aiGeneratedBackground: string | undefined
-    if (useAiBackground) {
-      try {
-        aiGeneratedBackground = await openaiService.generateCharacterBackground(
-          race,
-          characterClass,
-          background,
-          alignment,
-          name
-        )
-      } catch (error) {
-        console.error('Failed to generate AI background:', error)
-        // Continue without AI background rather than failing the whole request
+    // Create skills array from selected skills
+    const skillsData = selectedSkills.map(skillName => {
+      // Map skill name to ability (this should ideally come from a skill reference)
+      const skillAbilityMap: Record<string, string> = {
+        Acrobatics: 'dexterity',
+        'Animal Handling': 'wisdom',
+        Arcana: 'intelligence',
+        Athletics: 'strength',
+        Deception: 'charisma',
+        History: 'intelligence',
+        Insight: 'wisdom',
+        Intimidation: 'charisma',
+        Investigation: 'intelligence',
+        Medicine: 'wisdom',
+        Nature: 'intelligence',
+        Perception: 'wisdom',
+        Performance: 'charisma',
+        Persuasion: 'charisma',
+        Religion: 'intelligence',
+        'Sleight of Hand': 'dexterity',
+        Stealth: 'dexterity',
+        Survival: 'wisdom',
       }
-    }
+
+      return {
+        name: skillName,
+        ability: skillAbilityMap[skillName] || 'wisdom',
+        proficient: true,
+        expertise: false,
+      }
+    })
 
     // Create the character in the database
     const characterData = {
@@ -142,20 +152,15 @@ export async function POST(request: NextRequest) {
       hp: calculations.hp,
       ac: calculations.ac,
       proficiencyBonus: calculations.proficiencyBonus,
-      skills: defaultSkills.map(skill => ({
-        name: skill,
-        ability: 'wisdom', // This would be determined by skill type
-        proficient: true,
-        expertise: false,
-      })),
+      skills: skillsData,
       inventory: [], // Start with empty inventory
       spells: [], // Start with empty spells
       background,
       alignment,
+      gender: gender || null,
       personalityTraits: personalityTraits || [],
       backstory: backstory || null,
       notes: null,
-      ...(aiGeneratedBackground && { aiGeneratedBackground }),
     }
 
     const character = await prisma.character.create({
@@ -178,6 +183,7 @@ export async function POST(request: NextRequest) {
       spells: character.spells as any,
       background: character.background,
       alignment: character.alignment,
+      gender: character.gender,
       aiGeneratedBackground:
         (character as any).aiGeneratedBackground || undefined,
       personalityTraits:
@@ -234,6 +240,7 @@ export async function GET(request: NextRequest) {
       spells: character.spells as any,
       background: character.background,
       alignment: character.alignment,
+      gender: character.gender,
       aiGeneratedBackground:
         (character as any).aiGeneratedBackground || undefined,
       personalityTraits:

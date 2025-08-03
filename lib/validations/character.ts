@@ -20,13 +20,14 @@ export const createCharacterSchema = z.object({
   class: z.string().min(1, 'Class is required'),
   background: z.string().min(1, 'Background is required'),
   alignment: z.string().min(1, 'Alignment is required'),
+  gender: z.string().optional(),
   stats: abilityScoresSchema,
   personalityTraits: z.array(z.string()).optional(),
   backstory: z
     .string()
     .max(2000, 'Backstory must be 2000 characters or less')
     .optional(),
-  useAiBackground: z.boolean().optional(),
+  selectedSkills: z.array(z.string()).optional(),
 })
 
 // AI background generation schema

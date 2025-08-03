@@ -5,7 +5,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-
 export interface ReferenceDataContext {
   race?: any
   class?: any
@@ -223,17 +222,25 @@ Return ONLY a JSON array of 4-6 short personality trait strings, no additional t
     const classPrimary = context.class?.primaryAbility || []
     const raceBonuses = context.race?.abilityScoreIncrease || {}
 
-    const prompt = `Recommend optimal ability score distribution for a D&D 5e character:
+    const prompt = `Recommend optimal ability score distribution for a D&D 5e character using STRICT point-buy rules:
 - Class: ${characterClass}
 - Race: ${race || 'Not specified'}
 - Primary abilities: ${JSON.stringify(classPrimary)}
 - Racial bonuses: ${JSON.stringify(raceBonuses)}
 
-Provide a point-buy style distribution (using values 8-15 before racial modifiers) that:
+CRITICAL POINT-BUY RULES:
+- All abilities start at 8 (cost: 0 points)
+- Scores 9-13 cost 1 point each (so 13 costs 5 points total)
+- Score 14 costs 2 points (7 points total)
+- Score 15 costs 2 points (9 points total)
+- TOTAL BUDGET: Exactly 27 points
+- MAXIMUM SCORE: 15 (before racial bonuses)
+
+Provide a distribution that:
 1. Prioritizes the class's primary abilities
 2. Considers racial ability score bonuses
 3. Ensures decent Constitution for survivability
-4. Optimizes for effective gameplay
+4. Uses EXACTLY 27 points total
 
 Return a JSON object with:
 {
@@ -289,7 +296,7 @@ Return a JSON object with:
   async suggestCharacterNames(
     race: string,
     background?: string,
-    gender?: 'male' | 'female' | 'non-binary'
+    gender?: 'Male' | 'Female' | 'Non-binary' | 'Other' | 'Neutral'
   ): Promise<string[]> {
     const context = await this.getReferenceData(race)
 

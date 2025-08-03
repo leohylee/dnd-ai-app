@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/database/prisma'
 import type { ReferenceDataResponse } from '@/types/character'
 
-
-
 export async function GET() {
   try {
     const races = await prisma.referenceData.findMany({

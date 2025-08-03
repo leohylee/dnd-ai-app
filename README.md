@@ -5,18 +5,27 @@ An AI-powered D&D 5e web application built with Next.js, featuring intelligent c
 ## ✨ Features
 
 ### 🎲 Character Creation
+
 - **AI-Powered Background Generation** - Create rich, lore-appropriate character backstories
 - **Smart Ability Score Recommendations** - Get optimized stat distributions for your class
 - **Personality Trait Suggestions** - AI-generated traits based on race, class, and background
 - **Point-Buy Validation** - Ensures legal D&D 5e character builds
 - **Complete Stat Calculations** - Automatic HP, AC, proficiency bonus, and racial bonus calculations
 
+### 📖 Character Management
+
+- **View All Characters** - Browse your created characters with detailed previews
+- **Character Cards** - Display essential character information at a glance
+- **Character Search & Filter** - Find characters by name, race, class, or level
+
 ### 📚 D&D 5e Reference Database
+
 - **250+ D&D Items** - Complete database of races, classes, spells, backgrounds, equipment, and skills
 - **Official Content** - Accurate D&D 5e Player's Handbook data
 - **API Access** - RESTful endpoints for all reference data
 
 ### 🤖 AI Integration
+
 - **OpenAI GPT-4** - Advanced natural language generation
 - **Context-Aware** - AI uses actual D&D reference data for authentic suggestions
 - **Lore Consistency** - Maintains authentic D&D universe feel
@@ -40,6 +49,7 @@ An AI-powered D&D 5e web application built with Next.js, featuring intelligent c
 ## ⚡ Quick Start
 
 ### 1. Clone and Install
+
 ```bash
 git clone <repository-url>
 cd dnd-ai-app
@@ -47,13 +57,16 @@ npm install
 ```
 
 ### 2. Environment Setup
+
 Create a `.env` file in the root directory:
+
 ```env
 DATABASE_URL="postgresql://username:password@localhost:5432/dnd_dev"
 OPENAI_API_KEY="your-openai-api-key-here"
 ```
 
 ### 3. Database Setup
+
 ```bash
 # Generate Prisma client
 npm run db:generate
@@ -66,6 +79,7 @@ npm run db:seed
 ```
 
 ### 4. Start Development Server
+
 ```bash
 npm run dev
 ```
@@ -75,12 +89,14 @@ Visit `http://localhost:3000` to see the application.
 ## 📡 API Endpoints
 
 ### Character Management
+
 ```
 POST /api/characters          # Create character with AI assistance
 GET  /api/characters          # Get all characters (with pagination)
 ```
 
 ### D&D 5e Reference Data
+
 ```
 GET /api/reference/races      # Get all D&D 5e races
 GET /api/reference/classes    # Get all D&D 5e classes
@@ -88,6 +104,7 @@ GET /api/reference/backgrounds # Get all D&D 5e backgrounds
 ```
 
 ### AI Assistance
+
 ```
 POST /api/ai/generate-background # Generate AI character background
 POST /api/ai/suggest-traits     # Get AI personality trait suggestions
@@ -97,6 +114,7 @@ POST /api/ai/recommend-stats    # Get AI ability score recommendations
 ## 🧪 Testing the APIs
 
 ### Using curl
+
 ```bash
 # Get all races
 curl http://localhost:3000/api/reference/races
@@ -117,8 +135,7 @@ curl -X POST http://localhost:3000/api/characters \
       "intelligence": 10,
       "wisdom": 13,
       "charisma": 8
-    },
-    "useAiBackground": true
+    }
   }'
 
 # Generate AI background
@@ -134,6 +151,7 @@ curl -X POST http://localhost:3000/api/ai/generate-background \
 ```
 
 ### Using Postman
+
 Import the API collection and test all endpoints with the provided examples.
 
 ## 📊 Database
@@ -148,6 +166,7 @@ The application uses PostgreSQL with Prisma ORM and includes:
 - **AIContext** - AI conversation context and summaries
 
 ### Database Commands
+
 ```bash
 npm run db:studio     # Open Prisma Studio GUI
 npm run db:reset      # Reset database and reseed
@@ -176,6 +195,7 @@ dnd-ai-app/
 ## 🎯 Implementation Status
 
 ### ✅ Completed (Phase 1)
+
 - Character creation API with AI assistance
 - D&D 5e reference database (250+ items)
 - OpenAI integration for background/trait generation
@@ -184,10 +204,13 @@ dnd-ai-app/
 - Character stat calculations and point-buy validation
 
 ### 🔄 In Progress (Phase 2)
+
 - Frontend character creation UI
 - React components for reference data browsing
+- Character management and viewing system
 
 ### 📋 Planned (Phase 3+)
+
 - Campaign management system
 - AI Dungeon Master interactions
 - Dice rolling mechanics
